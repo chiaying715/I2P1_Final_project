@@ -14,7 +14,6 @@ void create_scene(SceneType type)
         scene = New_GameScene(GameScene_L);
         break;
         //need to add one more .c and .h to generate end game scene file
-        
     case EndGame_L: 
         scene = New_EndGame(EndGame_L);
         break;

@@ -53,12 +53,13 @@ void end_game_update(Scene *self)
             _Remove_elements(self, ele);
     }
     //game scene update: to switch to endgame scene
+    /*
     if (Endgamescene_switch_trigger==1)
     {
         self->scene_end = true;
         window = 2;
-        return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
-    }
+        //return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
+    }*/
 }
 void end_game_draw(Scene *self)
 {

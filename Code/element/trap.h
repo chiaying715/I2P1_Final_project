@@ -12,6 +12,7 @@ typedef struct _Trap
     int width, height; // the width and height of image
     ALLEGRO_BITMAP *img;
     int map_data[6][6];
+    bool activate;
 } Trap;
 
 Elements *New_Trap(int label);

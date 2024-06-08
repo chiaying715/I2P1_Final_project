@@ -14,6 +14,7 @@ Elements *New_Trap(int label)
     _Trap_load_map(pDerivedObj);
     pDerivedObj->x = WIDTH - pDerivedObj->width;
     pDerivedObj->y = HEIGHT - pDerivedObj->height;
+    pDerivedObj->activate = false;
     // setting the interact object
     pObj->inter_obj[pObj->inter_len++] = Character_L;
     // setting derived object function
@@ -37,13 +38,38 @@ void _Trap_load_map(Trap *Trap)
     }
     fclose(data);
 }
-void Trap_update(Elements *ele) {}
+void Trap_update(Elements *self) 
+{
+    Trap *Obj = ((Trap *)(self->pDerivedObj));
+    if (key_state[ALLEGRO_KEY_X])
+    {
+        Obj->activate = true;
+    }
+    else
+    {
+        Obj->activate = false;
+    }
+}
 void Trap_interact(Elements *self, Elements *tar)
 {
     if (tar->label == Character_L)
     {
+        Character *chara = (Character *)(tar->pDerivedObj);
+        Trap *Obj = (Trap *)(self->pDerivedObj);
+        if (chara->x >= Obj->x &&
+            chara->x <= Obj->x + Obj->width &&
+            Obj->activate)
+        {
+            Endgamescene_switch_trigger = 1;
+            printf("!!\n");
+        }
+        
+    }
+    /*
+    if (tar->label == Character_L)
+    {*/
         ////
-        Endgamescene_switch_trigger = 1;
+        
         ////
         /*Character *chara = (Character *)(tar->pDerivedObj);*/
         /*int right_limit = WIDTH - chara->width / 2;
@@ -56,7 +82,7 @@ void Trap_interact(Elements *self, Elements *tar)
         {
             _Character_update_position(tar, (right_limit - chara->x), 0);
         }*/
-    }
+    //}
 }
 void Trap_draw(Elements *self)
 {

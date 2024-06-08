@@ -134,7 +134,8 @@ bool game_update(Game *self)
         case 2:
             create_scene(EndGame_L);
         case -1:
-            return false;
+            printf("case -1\n");
+            //return false;
         default:
             break;
         }

@@ -57,6 +57,7 @@ void game_scene_update(Scene *self)
     {
         self->scene_end = true;
         window = 2;
+        printf("window2\n");
         return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
     }
 }
