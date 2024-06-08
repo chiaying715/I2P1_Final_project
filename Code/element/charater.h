@@ -11,6 +11,7 @@
 /*
    [character object]
 */
+
 typedef enum CharacterType
 {
     STOP = 0,
