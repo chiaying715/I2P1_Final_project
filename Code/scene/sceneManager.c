@@ -1,6 +1,7 @@
 #include "sceneManager.h"
 #include "menu.h"
 #include "gamescene.h"
+#include "endgame.h"
 Scene *scene = NULL;
 void create_scene(SceneType type)
 {
@@ -11,6 +12,11 @@ void create_scene(SceneType type)
         break;
     case GameScene_L:
         scene = New_GameScene(GameScene_L);
+        break;
+        //need to add one more .c and .h to generate end game scene file
+        
+    case EndGame_L: 
+        scene = New_EndGame(EndGame_L);
         break;
     default:
         break;
