@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 /*
-   [Character function]
+   [Character function]+
 */
 Elements *New_Character(int label)
 {
