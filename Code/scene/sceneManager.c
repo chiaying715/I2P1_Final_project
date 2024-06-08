@@ -2,11 +2,15 @@
 #include "menu.h"
 #include "gamescene.h"
 #include "endgame.h"
+#include "game_menu.h"
 Scene *scene = NULL;
 void create_scene(SceneType type)
 {
     switch (type)
     {
+    /*case Game_Menu_L:
+        scene = New_Game_Menu(Game_Menu_L);
+        break;*/
     case Menu_L:
         scene = New_Menu(Menu_L);
         break;

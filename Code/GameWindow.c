@@ -127,15 +127,17 @@ bool game_update(Game *self)
         {
         case 0:
             create_scene(Menu_L);
+            //create_scene(Game_Menu_L);
             break;
         case 1:
             create_scene(GameScene_L);
             break;
         case 2:
             create_scene(EndGame_L);
+            break;
         case -1:
             printf("case -1\n");
-            //return false;
+            return false;
         default:
             break;
         }
