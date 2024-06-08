@@ -8,7 +8,7 @@
 #include "../element/tree.h"
 #include "../element/projectile.h"
 #include "../element/trap.h"
-/*
+/* 
    [game scene object]
 */
 typedef enum EleType
