@@ -9,6 +9,13 @@ Scene *New_EndGame(int label)
     Scene *pObj = New_Scene(label);
     // setting derived object member
     pDerivedObj->background = al_load_bitmap("assets/image/endgame.jpg");
+    if (!pDerivedObj->background) {
+        printf("Failed to load background image!\n");
+        fprintf(stderr, "Failed to load background image!\n");
+        free(pDerivedObj);
+        free(pObj);
+        return NULL;
+    }
     pObj->pDerivedObj = pDerivedObj;
     // register element
     _Register_elements(pObj, New_Floor(Floor_L));
@@ -52,14 +59,27 @@ void end_game_update(Scene *self)
         if (ele->dele)
             _Remove_elements(self, ele);
     }
-    //game scene update: to switch to endgame scene
-    /*
-    if (Endgamescene_switch_trigger==1)
+    /*if (key_state[ALLEGRO_KEY_ESCAPE])
     {
         self->scene_end = true;
-        window = 2;
-        //return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
+        window = -1;
+        return;
     }*/
+    //endgame scene update: to exit
+    /*
+    BUTTTTTTTTT
+    原本計畫是在遊戲進到end game scene 之後，按下tab鍵，可以exit
+    但是我發現，我在遊戲進到end game scene 之後，按下tab鍵，會出現Assertion failed: format < ALLEGRO_NUM_PIXEL_FORMATS, file C:/dev/allegro_winpkg/universal/allegro/src/pixels.c, line 421然後就閃退了
+    
+    
+    if (key_state[ALLEGRO_KEY_TAB])//Exit_switch_trigger==1
+    {
+        self->scene_end = true;
+        window = -1;
+        printf("window-1\n");
+        return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
+    }*/
+
 }
 void end_game_draw(Scene *self)
 {

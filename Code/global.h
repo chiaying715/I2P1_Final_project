@@ -14,6 +14,7 @@
 #define max(x, y) ((x) < (y) ? (y) : (x))
 //added
 extern int Endgamescene_switch_trigger;
+extern int Exit_switch_trigger;
 //
 // note that you can't assign initial value for extern variable!
 extern const double FPS;

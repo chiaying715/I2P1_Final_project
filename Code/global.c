@@ -3,6 +3,7 @@
 #include <stdbool.h>
 //added
 int Endgamescene_switch_trigger = 0;
+int Exit_switch_trigger = 0;
 //
 // variables for global usage
 const double FPS = 60.0;

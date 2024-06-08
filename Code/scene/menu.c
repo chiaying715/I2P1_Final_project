@@ -34,7 +34,12 @@ void menu_update(Scene *self)
     if (key_state[ALLEGRO_KEY_ENTER])
     {
         self->scene_end = true;
-        window = 1;
+        window = 1; //game scene
+    }
+    else if (key_state[ALLEGRO_KEY_ESCAPE])
+    {
+        self->scene_end = true;
+        window = -1; //exit
     }
     return;
 }
@@ -43,7 +48,7 @@ void menu_draw(Scene *self)
     Menu *Obj = ((Menu *)(self->pDerivedObj));
     al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, -50 + Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to START");
     al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to ABOUT");
-    al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, 50+Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to EXIT");
+    al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, 50+Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to EXIT");
     al_draw_rectangle(Obj->title_x - 140, Obj->title_y - 55, Obj->title_x + 140, Obj->title_y + 70, al_map_rgb(255, 255, 255), 0);
     al_play_sample_instance(Obj->sample_instance);
 }

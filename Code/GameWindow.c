@@ -126,18 +126,24 @@ bool game_update(Game *self)
         switch (window)
         {
         case 0:
+            printf("case0\n");
             create_scene(Menu_L);
+            
             //create_scene(Game_Menu_L);
             break;
         case 1:
+            printf("case1\n");
             create_scene(GameScene_L);
+            
             break;
         case 2:
+            printf("case2\n");
             create_scene(EndGame_L);
+            
             break;
         case -1:
             printf("case -1\n");
-            return false;
+            return false; //game wil not update anymore
         default:
             break;
         }
