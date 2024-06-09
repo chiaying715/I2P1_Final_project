@@ -3,7 +3,7 @@
 #include "gamescene.h"
 #include "endgame.h"
 #include "game_menu.h"
-
+#include "success.h"
 Scene *scene = NULL;
 void create_scene(SceneType type)
 {
@@ -22,7 +22,9 @@ void create_scene(SceneType type)
     case EndGame_L: 
         scene = New_EndGame(EndGame_L);
         break;
-    
+    case Success_L:
+        scene = New_Success(Success_L);
+        break;
     default:
         break;
     }

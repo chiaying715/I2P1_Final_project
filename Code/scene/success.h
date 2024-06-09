@@ -7,27 +7,24 @@
 #include "../element/teleport.h"
 #include "../element/tree.h"
 #include "../element/projectile.h"
+#include "../element/success_chara.h"
+#include "../element/test.h"
 /*
    [game scene object]
 */
-/*
-typedef enum EleType
+
+typedef enum _EleType_SuccessScene
 {
-    Floor_L,
-    Teleport_L,
-    Tree_L,
-    Character_L,
-    Projectile_L,
-    Trap_L
-} EleType;*/
+    Success_chara_L
+} EleType_SuccessScene;
 typedef struct _Success
 {
     ALLEGRO_BITMAP *background;
 
 } Success;
 Scene *New_Success(int label);
-void success_update(Scene *self);
-void success_draw(Scene *self);
-void success_destroy(Scene *self);
+void Success_update(Scene *self);
+void Success_draw(Scene *self);
+void Success_destroy(Scene *self);
 
 #endif

@@ -1,35 +1,33 @@
 #include "endgame.h"
 //#include "gamescene.h"
+
 #include "success.h"
-/*
-   [Success function]
+
+/*make
+   [Test function]
 */
 Scene *New_Success(int label)
 {
+    
     Success *pDerivedObj = (Success *)malloc(sizeof(Success));
     Scene *pObj = New_Scene(label);
     // setting derived object member
     pDerivedObj->background = al_load_bitmap("assets/image/success.jpg");
-    // if (!pDerivedObj->background) {
-    //     printf("Failed to load background image!\n");
-    //     fprintf(stderr, "Failed to load background image!\n");
-    //     free(pDerivedObj);
-    //     free(pObj);
-    //     return NULL;
-    // }
     pObj->pDerivedObj = pDerivedObj;
     // register element
-    _Register_elements(pObj, New_Floor(Floor_L));
-    _Register_elements(pObj, New_Teleport(Teleport_L));
-    _Register_elements(pObj, New_Tree(Tree_L));
-    _Register_elements(pObj, New_Character(Character_L));
+    printf("New_Test1\n");
+    _Register_elements(pObj, New_Test(Success_chara_L));
+    
     // setting derived object function
-    pObj->Update = success_update;
-    pObj->Draw = success_draw;
-    pObj->Destroy = success_destroy;
+    pObj->Update = Success_update;
+    printf("New_Test3\n");
+    pObj->Draw = Success_draw;
+    printf("New_Test4\n");
+    pObj->Destroy = Success_destroy;
+    printf("New_Test5\n");
     return pObj;
 }
-void success_update(Scene *self)
+void Success_update(Scene *self)
 {
     // update every element
     ElementVec allEle = _Get_all_elements(self);
@@ -66,7 +64,7 @@ void success_update(Scene *self)
         window = -1;
         return;
     }*/
-    //Success scene update: to exit
+    //Test scene update: to exit
     /*
     BUTTTTTTTTT
     原本計畫是在遊戲進到end game scene 之後，按下tab鍵，可以exit
@@ -82,7 +80,7 @@ void success_update(Scene *self)
     }*/
 
 }
-void success_draw(Scene *self)
+void Success_draw(Scene *self)
 {
     al_clear_to_color(al_map_rgb(0, 0, 0));
     Success *gs = ((Success *)(self->pDerivedObj));
@@ -93,8 +91,9 @@ void success_draw(Scene *self)
         Elements *ele = allEle.arr[i];
         ele->Draw(ele);
     }
+    //al_flip_display();
 }
-void success_destroy(Scene *self)
+void Success_destroy(Scene *self)
 {
     Success *Obj = ((Success *)(self->pDerivedObj));
     ALLEGRO_BITMAP *background = Obj->background;

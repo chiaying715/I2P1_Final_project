@@ -41,6 +41,12 @@ void menu_update(Scene *self)
         self->scene_end = true;
         window = -1; //exit
     }
+    //測試用之後要放到endgame scene裡面
+    else if (key_state[ALLEGRO_KEY_CAPSLOCK])
+    {
+        self->scene_end = true;
+        window = 3; //success scene
+    }
     return;
 }
 void menu_draw(Scene *self)
