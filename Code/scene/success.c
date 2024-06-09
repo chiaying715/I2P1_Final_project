@@ -3,7 +3,8 @@
 //#include "gamescene.h"
 #include <stdbool.h>
 #include "success.h"
-
+#include "GameWindow.h"
+extern Game *game;
 /*make
    [Test function]
 */
@@ -129,4 +130,10 @@ void Success_destroy(Scene *self)
     al_destroy_sample_instance(Obj->sample_instance);
     free(Obj);
     free(self);
+}
+
+void End_Game()
+{
+    game_destroy(game);
+    exit(0);
 }
