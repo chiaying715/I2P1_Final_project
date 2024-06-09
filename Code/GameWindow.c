@@ -123,11 +123,13 @@ bool game_update(Game *self)
     if (scene->scene_end)
     {
         scene->Destroy(scene);
+        printf("window: %d\n", window);
         switch (window)
         {
         case 0:
             printf("case0\n");
             create_scene(Menu_L);
+            printf("case0\n");
             //create_scene(Game_Menu_L);
             break;
         case 1:
@@ -143,6 +145,11 @@ bool game_update(Game *self)
             create_scene(Success_L);
             printf("case 3\n");
             break;
+        case 4:
+            printf("case 4\n");
+            create_scene(About_L);
+            printf("case 4\n");
+            break;
         case -1:
             printf("case -1\n");
             return false; //game wil not update anymore
@@ -155,7 +162,7 @@ bool game_update(Game *self)
 void game_draw(Game *self)
 {
     // Flush the screen first.
-    al_clear_to_color(al_map_rgb(0, 0, 0));
+    al_clear_to_color(al_map_rgb(255, 255, 255));
     scene->Draw(scene);
     al_flip_display();
 }

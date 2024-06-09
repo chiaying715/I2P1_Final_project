@@ -10,10 +10,9 @@
 */
 typedef struct _About
 {
-    ALLEGRO_FONT *font;
     ALLEGRO_SAMPLE *song;
     ALLEGRO_SAMPLE_INSTANCE *sample_instance;
-    int title_x, title_y;
+    ALLEGRO_BITMAP *background;
 } About;
 Scene *New_About(int label);
 void About_update(Scene *self);

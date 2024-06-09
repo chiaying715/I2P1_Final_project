@@ -3,8 +3,8 @@
 //#include "gamescene.h"
 #include <stdbool.h>
 #include "success.h"
-#include "GameWindow.h"
-extern Game *game;
+#include "../GameWindow.h"
+
 /*make
    [Test function]
 */
@@ -80,12 +80,13 @@ void Success_update(Scene *self)
         if (ele->dele)
             _Remove_elements(self, ele);
     }
-    /*if (key_state[ALLEGRO_KEY_ESCAPE])
+    if (key_state[ALLEGRO_KEY_ESCAPE])
     {
         self->scene_end = true;
-        window = -1;
+        end_game_destroy(self);
+        exit(0);
         return;
-    }*/
+    }
     //Test scene update: to exit
     /*
     BUTTTTTTTTT
@@ -132,8 +133,12 @@ void Success_destroy(Scene *self)
     free(self);
 }
 
+
+/*
+extern Game *game;
 void End_Game()
 {
     game_destroy(game);
     exit(0);
 }
+*/
