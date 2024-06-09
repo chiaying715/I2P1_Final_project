@@ -1,6 +1,7 @@
+#include <allegro5/allegro_primitives.h>
 #include "endgame.h"
 //#include "gamescene.h"
-
+#include <stdbool.h>
 #include "success.h"
 
 /*make
@@ -8,12 +9,32 @@
 */
 Scene *New_Success(int label)
 {
-    
     Success *pDerivedObj = (Success *)malloc(sizeof(Success));
     Scene *pObj = New_Scene(label);
     // setting derived object member
+    pDerivedObj->song = al_load_sample("assets/sound/success_goodnight.mp3");
+    al_reserve_samples(20);
+    pDerivedObj->sample_instance = al_create_sample_instance(pDerivedObj->song);
     pDerivedObj->background = al_load_bitmap("assets/image/success.jpg");
     pObj->pDerivedObj = pDerivedObj;
+
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(pDerivedObj->sample_instance, ALLEGRO_PLAYMODE_LOOP);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(pDerivedObj->sample_instance, al_get_default_mixer());
+    ///////////
+    al_play_sample_instance(pDerivedObj->sample_instance);
+    if (al_get_sample_instance_playing(pDerivedObj->sample_instance )) {
+    printf("The sample instance is playing.\n");
+} else {
+    printf("The sample instance is not playing.\n");
+}
+    ///////////
+    // set the volume of instance
+    al_set_sample_instance_gain(pDerivedObj->sample_instance, 0.1);
+    pObj->pDerivedObj = pDerivedObj;
+
+
     // register element
     printf("New_Test1\n");
     _Register_elements(pObj, New_Test(Success_chara_L));
@@ -104,6 +125,8 @@ void Success_destroy(Scene *self)
         Elements *ele = allEle.arr[i];
         ele->Destroy(ele);
     }
+    al_destroy_sample(Obj->song);
+    al_destroy_sample_instance(Obj->sample_instance);
     free(Obj);
     free(self);
 }

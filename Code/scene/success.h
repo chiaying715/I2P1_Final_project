@@ -9,6 +9,8 @@
 #include "../element/projectile.h"
 #include "../element/success_chara.h"
 #include "../element/test.h"
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 /*
    [game scene object]
 */
@@ -20,7 +22,8 @@ typedef enum _EleType_SuccessScene
 typedef struct _Success
 {
     ALLEGRO_BITMAP *background;
-
+    ALLEGRO_SAMPLE *song;
+    ALLEGRO_SAMPLE_INSTANCE *sample_instance;
 } Success;
 Scene *New_Success(int label);
 void Success_update(Scene *self);
