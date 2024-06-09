@@ -56,8 +56,9 @@ void Trap_interact(Elements *self, Elements *tar)
     {
         Character *chara = (Character *)(tar->pDerivedObj);
         Trap *Obj = (Trap *)(self->pDerivedObj);
-        if (chara->x >= Obj->x &&
-            (chara->x <= Obj->x + Obj->width))
+        printf("Chara y=%d, HEIGHT - Obj->height=%d\n",chara->x,50 + Obj->x - Obj->width);
+        if ((chara->x >= 65 + Obj->x - Obj->width)&&
+            (chara->x <= Obj->x + Obj->width)&&(chara->y >= HEIGHT - Obj->height - 150))
         {
             Endgamescene_switch_trigger = 1;
             printf("!!\n");
