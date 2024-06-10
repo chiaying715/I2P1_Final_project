@@ -67,6 +67,9 @@ Scene *New_GameScene(int label)
     pDerivedObj->lastTreeTime = 0.0;
     _Register_elements(pObj, New_Tree(Tree_L));
     _Register_elements(pObj, New_Character(Character_L));
+    printf("into chara\n");
+    _Register_elements(pObj, New_Trap(Trap_L));
+    printf("into trap\n");
     // setting derived object function
     pObj->Update = game_scene_update;
     pObj->Draw = game_scene_draw;
@@ -79,37 +82,6 @@ Scene *New_GameScene(int label)
 }
 void game_scene_update(Scene *self)
 {
-    /*
-    // update every element
-    ElementVec allEle = _Get_all_elements(self);
-    for (int i = 0; i < allEle.len; i++)
-    {
-
-        allEle.arr[i]->Update(allEle.arr[i]);
-    }
-
-    // run interact for every element
-    for (int i = 0; i < allEle.len; i++)
-    {
-        Elements *ele = allEle.arr[i];
-        // run every interact object
-        for (int j = 0; j < ele->inter_len; j++)
-        {
-            int inter_label = ele->inter_obj[j];
-            ElementVec labelEle = _Get_label_elements(self, inter_label);
-            for (int i = 0; i < labelEle.len; i++)
-            {
-                ele->Interact(ele, labelEle.arr[i]);
-            }
-        }
-    }
-    // remove element
-    for (int i = 0; i < allEle.len; i++)
-    {
-        Elements *ele = allEle.arr[i];
-        if (ele->dele)
-            _Remove_elements(self, ele);
-    }*/
     GameScene *gs = (GameScene *)(self->pDerivedObj);
     double now = al_get_time(); // 獲取當前時間
 
@@ -166,6 +138,14 @@ void game_scene_update(Scene *self)
         Elements *ele = allEle.arr[i];
         if (ele->dele)
             _Remove_elements(self, ele);
+    }
+    //game scene update: to switch to endgame scene
+    if (Endgamescene_switch_trigger==1)
+    {
+        self->scene_end = true;
+        window = 2;
+        printf("window2\n");
+        return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
     }
 }
 void game_scene_draw(Scene *self)

@@ -7,6 +7,7 @@
 #include "../element/floor.h"
 #include "../element/teleport.h"
 #include "../element/tree.h"
+#include "../element/trap.h"
 #include "../element/projectile.h"
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
@@ -22,7 +23,9 @@ typedef enum EleType
     Projectile_L,
     Seeds_s_L,
     Seeds_c_L,
-    Seeds_e_L
+    Seeds_e_L,
+    Trap_L, 
+    Butcher_L
 } EleType;
 typedef struct _GameScene
 {

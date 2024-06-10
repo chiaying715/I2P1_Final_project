@@ -124,18 +124,36 @@ bool game_update(Game *self)
     if (scene->scene_end)
     {
         scene->Destroy(scene);
+        printf("window: %d\n", window);
         switch (window)
         {
         case 0:
+            printf("case0\n");
             create_scene(Menu_L);
+            printf("case0\n");
+            //create_scene(Game_Menu_L);
             break;
         case 1:
+            printf("case1\n");
             create_scene(GameScene_L);
-            //printf("case 1\n");
+            break;
+        case 2:
+            printf("case2\n");
+            create_scene(EndGame_L);
+            break;
+        case 3:
+            printf("case 3\n");
+            create_scene(Success_L);
+            printf("case 3\n");
+            break;
+        case 4:
+            printf("case 4\n");
+            create_scene(About_L);
+            printf("case 4\n");
             break;
         case -1:
             printf("case -1\n");
-            return false;
+            return false; //game wil not update anymore
         default:
             break;
         }
