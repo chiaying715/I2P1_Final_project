@@ -25,6 +25,8 @@
 typedef struct _EndGame
 {
     ALLEGRO_BITMAP *background;
+    ALLEGRO_SAMPLE *song;
+    ALLEGRO_SAMPLE_INSTANCE *sample_instance;
 } EndGame;
 Scene *New_EndGame(int label);
 void end_game_update(Scene *self);
