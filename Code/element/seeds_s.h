@@ -22,6 +22,7 @@ typedef struct _Seeds_s
     ALLEGRO_TIMER *timer; // 計時器
     int countdown; // 倒數時間
     ALLEGRO_EVENT_QUEUE *event_queue; // 新增事件佇列成員
+    bool dele;
 } Seeds_s;
 Elements *New_Seeds_s(int label, int x, int y);
 void Seeds_s_update(Elements *self);

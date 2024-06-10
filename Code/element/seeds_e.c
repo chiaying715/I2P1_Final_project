@@ -5,6 +5,7 @@
 #include <allegro5/allegro_font.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "../scene/sceneManager.h"
 /*
    [Seeds_e function]
 */
@@ -56,7 +57,10 @@ void Seeds_e_update(Elements *self)
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             double current_time = al_get_time();
             double elapsed_time = current_time - Obj->plant_time;
-
+            if(Obj->dele){
+                self->dele=1;
+                Obj->dele=0;
+            }
             if (elapsed_time >= 90.0) {
                 Obj->is_harvestable = true;
             }
@@ -74,7 +78,16 @@ void Seeds_e_interact(Elements *self, Elements *tar)
 {
     Seeds_e *Obj = ((Seeds_e *)(self->pDerivedObj));
     //printf("in seeds_e interact\n");
-    if (tar->label == Character_L&&Obj->is_harvestable&&key_state[ALLEGRO_KEY_H]) {
+    Scene *currentScene = scene;
+    ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_e_L);
+    if(thief!=0) {
+        for (int i = 0; i < allSeeds.len; i++) {
+            Seeds_e *seed = (Seeds_e *)(allSeeds.arr[i]->pDerivedObj);
+            seed->dele = true;
+        }
+        thief-=1;
+    }
+    else if (tar->label == Character_L&&Obj->is_harvestable&&key_state[ALLEGRO_KEY_H]) {
         Seeds_e *Obj = (Seeds_e *)(self->pDerivedObj);
         Character *chara = (Character *)(tar->pDerivedObj);
         if (chara->hitbox->overlap(chara->hitbox, Obj->hitbox))

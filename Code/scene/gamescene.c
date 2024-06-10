@@ -17,6 +17,9 @@ enum BackgroundState {
     NIGHT
 };
 
+
+ALLEGRO_EVENT_QUEUE *timer_queue;
+
 // 全局變量
 enum BackgroundState background_state = DAY;
 int elapsed_time = 0;
@@ -42,7 +45,7 @@ void switch_background() {
             break;
         case NIGHT:
             background_state = DAY;
-            thief = 1;
+            thief = 3;
             printf("Change from 'NIGHT' to 'DAY'.\n");
             break;
         default:
@@ -72,7 +75,8 @@ Scene *New_GameScene(int label)
     pObj->Destroy = game_scene_destroy;
     // 初始化事件队列和定时器
     timer = al_create_timer(1.0);
-    al_register_event_source(event_queue, al_get_timer_event_source(timer));
+    timer_queue = al_create_event_queue();
+    al_register_event_source(timer_queue, al_get_timer_event_source(timer));
     al_start_timer(timer);
     return pObj;
 }
@@ -111,7 +115,7 @@ void game_scene_update(Scene *self)
     }*/
 
    ALLEGRO_EVENT ev;
-    while (al_get_next_event(event_queue, &ev)) {
+    while (al_get_next_event(timer_queue, &ev)) {
         printf("%d", elapsed_time);
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             elapsed_time++;
