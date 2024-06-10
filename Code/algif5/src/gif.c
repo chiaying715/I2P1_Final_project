@@ -60,8 +60,11 @@ static void deinterlace (ALGIF_BITMAP *bmp)
 }
 
 ALGIF_ANIMATION *algif_load_raw(ALLEGRO_FILE *file) {
-    if (!file)
+    if (!file) {
+        printf("NPPPPP\n");
         return NULL;
+    }
+    printf("load raw\n");
 
     int version;
     ALGIF_BITMAP *bmp = NULL;
@@ -108,6 +111,8 @@ ALGIF_ANIMATION *algif_load_raw(ALLEGRO_FILE *file) {
 
     memset(&frame, 0, sizeof frame); /* For first frame. */
     frame.transparent_index = -1;
+
+    printf("before loop\n");
 
     do
     {
@@ -211,6 +216,7 @@ ALGIF_ANIMATION *algif_load_raw(ALLEGRO_FILE *file) {
                 /* Possibly more blocks until terminator block (0). */
                 while (i)
                 {
+                    printf("loop_i\n");
                     al_fseek (file, i, ALLEGRO_SEEK_CUR);
                     i = al_fgetc (file);
                 }
@@ -218,10 +224,12 @@ ALGIF_ANIMATION *algif_load_raw(ALLEGRO_FILE *file) {
             case 0x3b:
                 /* GIF Trailer. */
                 al_fclose (file);
+                printf("return gif\n");
                 return gif;
         }
     }
     while (true);
+    printf("loop end\n");
   error:
     if (file)
         al_fclose (file);
@@ -229,5 +237,6 @@ ALGIF_ANIMATION *algif_load_raw(ALLEGRO_FILE *file) {
         algif_destroy_animation (gif);
     if (bmp)
         algif_destroy_bitmap (bmp);
+    printf("errrrrr\n");
     return NULL;
 }

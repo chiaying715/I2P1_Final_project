@@ -31,9 +31,11 @@ void _Remove_elements(Scene *scene, Elements *ele)
 }
 void _Register_elements(Scene *scene, Elements *ele)
 {
+    printf("before new node\n");
     EPNode *ptr = scene->ele_list[ele->label];
     EPNode *new_node = (EPNode *)malloc(sizeof(EPNode));
     new_node->id = scene->ele_num++;
+    printf("New node id: %d\n", new_node->id);
     new_node->ele = ele;
     new_node->next = NULL;
     ele->id = new_node->id;

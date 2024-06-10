@@ -7,6 +7,19 @@
 /*
    [scene object]
 */
+
+// New
+typedef enum EleType
+{
+    Floor_L,
+    Teleport_L,
+    Tree_L,
+    Character_L,
+    Projectile_L,
+    Trap_L,
+    Butcher_L
+} EleType;
+
 typedef struct EPNode
 {
     int id;

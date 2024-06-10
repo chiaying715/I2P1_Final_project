@@ -1,5 +1,6 @@
 #include "endgame.h"
-#include "gamescene.h"
+// #include "element.h"
+// #include "gamescene.h"
 /*
    [EndGame function]
 */
@@ -18,8 +19,10 @@ Scene *New_EndGame(int label)
     }
     pObj->pDerivedObj = pDerivedObj;
     // register element
-    printf("kkk\n");
-    _Register_elements(pObj, New_Butcher(Butcher_L));
+    printf("before register butcher\n");
+    Elements* tmp = New_Butcher(Butcher_L);
+    if (tmp == NULL) printf("Null err\n"); 
+    _Register_elements(pObj, tmp/*New_Butcher(Butcher_L)*/);
     // _Register_elements(pObj, New_Character(Character_L));
     _Register_elements(pObj, New_Floor(Floor_L));
     _Register_elements(pObj, New_Character(Character_L));

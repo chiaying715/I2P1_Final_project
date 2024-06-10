@@ -58,10 +58,13 @@ void algif_render_frame(ALGIF_ANIMATION *gif, int frame, int xpos, int ypos) {
 
 ALGIF_ANIMATION *algif_load_animation_f(ALLEGRO_FILE *file) {
     ALGIF_ANIMATION *gif = algif_load_raw(file);
+    printf("load raw success\n");
 
-    if (!gif)
+    if (!gif) {
+        printf("lost gif\n");
         return gif;
-
+    }
+    printf("got gif\n");
     al_init_primitives_addon();
 
     gif->duration = 0;
@@ -84,9 +87,11 @@ ALGIF_ANIMATION *algif_load_animation_f(ALLEGRO_FILE *file) {
 
 ALGIF_ANIMATION *algif_load_animation(char const *filename) {
     ALLEGRO_FILE *file = al_fopen(filename, "rb");
+    printf("open file success\n");
     return algif_load_animation_f(file);
 }
 ALGIF_ANIMATION *algif_new_gif(char const *filename, int loop) {
+    printf("algif_new\n");
     ALGIF_ANIMATION *gif = algif_load_animation(filename);
     gif->loop = loop;
     gif->start_time = 0;

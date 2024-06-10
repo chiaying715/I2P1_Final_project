@@ -11,6 +11,7 @@
 
 Elements *New_Butcher(int label)
 {
+    printf("before malloc new butcher\n");
     Butcher *pDerivedObj = (Butcher *)malloc(sizeof(Butcher));
     Elements *pObj = New_Elements(label);
     // setting derived object member
@@ -22,14 +23,18 @@ Elements *New_Butcher(int label)
     //     sprintf(buffer, "assets/image/butcher%s.gif", state_string[i]);
     //     pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
     // }
-    pDerivedObj->gif_status[0] = algif_new_gif("assets/image/butcher1.gif", -1);
+    printf("before load butcher gif\n");
+    pDerivedObj->gif_status[0] = algif_new_gif("assets/image/chara_farmer.gif", -1);
     // initial the geometric information of Butcher
+    printf("before init butcher's geo info\n");
     pDerivedObj->width = pDerivedObj->gif_status[0]->width;
     pDerivedObj->height = pDerivedObj->gif_status[0]->height;
+    printf("before setting butcher's position\n");
     // pDerivedObj->x = 300;
     // pDerivedObj->y = HEIGHT - pDerivedObj->height - 60;
     pDerivedObj->x = 0;
     pDerivedObj->y = 0;
+    printf("before create new hitbox\n");
     pDerivedObj->hitbox = New_Rectangle(pDerivedObj->x,
                                         pDerivedObj->y,
                                         pDerivedObj->x + pDerivedObj->width,
@@ -39,11 +44,16 @@ Elements *New_Butcher(int label)
     pDerivedObj->state = STOP;
     pDerivedObj->new_proj = false;
     pObj->pDerivedObj = pDerivedObj;
+    printf("before draw\n");
     // setting derived object function
     pObj->Draw = Butcher_draw;
+    printf("before update\n");
     pObj->Update = Butcher_update;
+    printf("before interact\n");
     pObj->Interact = Butcher_interact;
+    printf("before destroy\n");
     pObj->Destroy = Butcher_destory;
+    printf("before return\n");
     return pObj;
 }
 

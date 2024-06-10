@@ -11,16 +11,16 @@
 /* 
    [game scene object]
 */
-typedef enum _EleType_GameScene
-{
-    Floor_L,
-    Teleport_L,
-    Tree_L,
-    Character_L,
-    Projectile_L,
-    Trap_L, 
-    Butcher_L
-} EleType_GameScene;
+// typedef enum _EleType_GameScene
+// {
+//     Floor_L,
+//     Teleport_L,
+//     Tree_L,
+//     Character_L,
+//     Projectile_L,
+//     Trap_L, 
+//     // Butcher_L
+// } EleType_GameScene;
 typedef struct _GameScene
 {
     ALLEGRO_BITMAP *background;
