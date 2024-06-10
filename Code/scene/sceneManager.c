@@ -13,6 +13,15 @@ void create_scene(SceneType type)
         printf("into gamescene\n");
         scene = New_GameScene(GameScene_L);
         break;
+    case EndGame_L:
+        scene = New_EndGame(EndGame_L);
+        break;
+    case Success_L:
+        scene = New_Success(Success_L);
+        break;
+    case About_L:
+        scene = New_About(About_L);
+        break;
     default:
         break;
     }

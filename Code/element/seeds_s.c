@@ -133,7 +133,7 @@ void seeds_s_update(Elements *self)
 void Seeds_s_interact(Elements *self, Elements *tar)
 {
     seeds_s *Obj = ((seeds_s *)(self->pDerivedObj));
-    /*Sif (tar->label == Character_L && Obj->is_harvestable) {
+    /*if (tar->label == Character_L && Obj->is_harvestable) {
         Obj->score += 5; // 收获后增加积分
         Obj->is_harvestable = false; // 重置为不可收获状态
         Obj->plant_time = al_get_time(); // 重置种植时间

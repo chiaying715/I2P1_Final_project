@@ -11,7 +11,7 @@
 Elements *New_Success_Character(int label)
 {
     
-    Character *pDerivedObj = (Success_Character *)malloc(sizeof(Success_Character));
+    Success_Character *pDerivedObj = (Success_Character *)malloc(sizeof(Success_Character));
     Elements *pObj = New_Elements(label);
     // setting derived object member
     // load character images

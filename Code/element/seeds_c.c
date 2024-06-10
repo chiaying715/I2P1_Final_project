@@ -70,7 +70,7 @@ Elements *New_Seeds_c(int label, int x, int y)
     }
     pDerivedObj->countdown = 50;
     pDerivedObj->minus = 0;
-    //pDerivedObj->last_watered_time = al_get_time();
+    pDerivedObj->last_watered_time = al_get_time();
     pDerivedObj->event_queue = al_create_event_queue();
     if (!pDerivedObj->event_queue) {
         printf("Error: Failed to create event queue\n");
@@ -103,14 +103,14 @@ void Seeds_c_update(Elements *self)
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             double current_time = al_get_time();
             double elapsed_time = current_time - Obj->plant_time;
-            //double time_since_last_watered = current_time - Obj->last_watered_time;
+            double time_since_last_watered = current_time - Obj->last_watered_time;
 
-           /*if (time_since_last_watered >= 10.0) {
+           if (time_since_last_watered >= 10.0) {
                 printf("Seeds_c object has not been watered for 60 seconds and will be destroyed\n");
                 self->dele = true; // 标记为删除
                 Obj->last_watered_time = current_time;
                 return;
-            }*/
+            }
 
             if (elapsed_time >= 50.0) {
                 Obj->is_harvestable = true;
@@ -170,7 +170,7 @@ void reduce_seeds_c_countdown() {
     }
 }
 
-/*void water_seeds_c(Elements *self) {
+void water_seeds_c(Elements *self) {
     Scene *currentScene = scene;
     if (currentScene != NULL) {
         ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_c_L);
@@ -181,7 +181,6 @@ void reduce_seeds_c_countdown() {
         }
     }
 }
-*/
 // 修改 Seeds_c 的繪製函數
 void Seeds_c_draw(Elements *self) 
 {

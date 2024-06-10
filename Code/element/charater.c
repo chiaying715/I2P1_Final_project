@@ -122,7 +122,7 @@ void Character_update(Elements *self)
             //chara->state = STOP;
             chara->state = MOVE;
         }
-        /* else if (key_state[ALLEGRO_KEY_F])
+        else if (key_state[ALLEGRO_KEY_F])
         {
             // Handle watering seeds when F key is pressed
             printf("ALLEGRO_KEY_F pressed\n");
@@ -141,13 +141,14 @@ void Character_update(Elements *self)
                     int distance_y = abs(chara->y - seed->y);
                     int max_distance = 50; // 设置一个距离阈值
 
-                    if (distance_x <= max_distance && distance_y <= max_distance)
+                    /*if (distance_x <= max_distance && distance_y <= max_distance)
                     {
                         water_seeds_c(seedElement); // 为附近的种子浇水
-                    }
+                    }*/
+                   water_seeds_c(seedElement);
                 }
             }
-        }*/
+        }
         else
         {
             chara->state = STOP;
