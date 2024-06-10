@@ -7,6 +7,8 @@
 #include <stdbool.h>
 #include "../algif5/src/algif.h"
 #include "seeds_c.h"
+#include "seeds_s.h"
+#include "seeds_e.h"
 
 //#include "Rectangle.h" :not right - see line 3
 /*
@@ -29,11 +31,11 @@ Elements *New_Tree(int label)
     // setting derived object member
     double now = al_get_time(); // 獲取當前時間
     printf("lastTreeTime1=%f now1=%f\n", lastTreeTime, now);
-    if (lastTreeTime==0||now - lastTreeTime >= 10.0) // 檢查是否已經過了十秒
+    if (lastTreeTime==0||now - lastTreeTime >= 3.0) // 檢查是否已經過了十秒
     {
         lastTreeTime = now;
         // 隨機生成樹木位置
-        int position = randomTreePosition();
+        position = randomTreePosition();
         printf("posittion:%d\n", position);
         // setting derived object member
         pDerivedObj->img = al_load_bitmap("assets/image/Pupu.png");
@@ -93,6 +95,8 @@ void Tree_interact(Elements *self, Elements *tar) {
         {
             self->dele = true;
             reduce_seeds_c_countdown();
+            reduce_seeds_s_countdown();
+            reduce_seeds_e_countdown();
             printf("-10s\n"); // 打印 -10
   
         } else {
