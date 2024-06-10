@@ -43,15 +43,20 @@ Elements *New_Character(int label)
     al_attach_sample_instance_to_mixer(pDerivedObj->wlk_Sound, al_get_default_mixer());
 
     // load effective sound for walk. by lintzoe
-    /*ALLEGRO_SAMPLE *sample4 = al_load_sample("assets/sound/up_sound.mp3");
+    ALLEGRO_SAMPLE *sample4 = al_load_sample("assets/sound/up_sound.mp3");
     pDerivedObj->up_Sound = al_create_sample_instance(sample4);
     al_set_sample_instance_playmode(pDerivedObj->up_Sound, ALLEGRO_PLAYMODE_ONCE);
-    al_attach_sample_instance_to_mixer(pDerivedObj->up_Sound, al_get_default_mixer());*/
+    al_attach_sample_instance_to_mixer(pDerivedObj->up_Sound, al_get_default_mixer());
 
     ALLEGRO_SAMPLE *sample5 = al_load_sample("assets/sound/hvst_sound.mp3");
     pDerivedObj->hvst_Sound = al_create_sample_instance(sample5);
     al_set_sample_instance_playmode(pDerivedObj->hvst_Sound, ALLEGRO_PLAYMODE_ONCE);
     al_attach_sample_instance_to_mixer(pDerivedObj->hvst_Sound, al_get_default_mixer());
+
+    ALLEGRO_SAMPLE *sample6 = al_load_sample("assets/sound/watering_sound.mp3");
+    pDerivedObj->watering_Sound = al_create_sample_instance(sample6);
+    al_set_sample_instance_playmode(pDerivedObj->watering_Sound, ALLEGRO_PLAYMODE_ONCE);
+    al_attach_sample_instance_to_mixer(pDerivedObj->watering_Sound, al_get_default_mixer());
 
     // initial the geometric information of character
     pDerivedObj->width = pDerivedObj->gif_status[0]->width;
@@ -216,6 +221,14 @@ void Character_draw(Elements *self)
     if(key_state[ALLEGRO_KEY_H])
     {
         al_play_sample_instance(chara->hvst_Sound);
+    }
+    if(key_state[ALLEGRO_KEY_F])
+    {
+        al_play_sample_instance(chara->watering_Sound);
+    }
+    if(key_state[ALLEGRO_KEY_S])
+    {
+        al_play_sample_instance(chara->up_Sound);
     }
 }
 void Character_destory(Elements *self)

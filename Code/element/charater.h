@@ -30,6 +30,7 @@ typedef struct _Character
     ALLEGRO_SAMPLE_INSTANCE *wlk_Sound;
     ALLEGRO_SAMPLE_INSTANCE *up_Sound;
     ALLEGRO_SAMPLE_INSTANCE *hvst_Sound;
+    ALLEGRO_SAMPLE_INSTANCE *watering_Sound;
     int anime;      // counting the time of animation
     int anime_time; // indicate how long the animation
     bool new_proj;
