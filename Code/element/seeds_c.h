@@ -27,7 +27,7 @@ typedef struct _Seeds_c
 } Seeds_c;
 Elements *New_Seeds_c(int label, int x, int y);
 void reduce_seeds_c_countdown() ;
-void water_seeds_c(Elements *self);
+void water_seeds_c(Seeds_c *self);
 void Seeds_c_update(Elements *self);
 void Seeds_c_interact(Elements *self, Elements *tar);
 void Seeds_c_draw(Elements *self);

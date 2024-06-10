@@ -170,15 +170,15 @@ void reduce_seeds_c_countdown() {
     }
 }
 
-void water_seeds_c(Elements *self) {
+void water_seeds_c(Seeds_c *self) {
     Scene *currentScene = scene;
     if (currentScene != NULL) {
-        ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_c_L);
-        for (int i = 0; i < allSeeds.len; i++) {
-            Seeds_c *seed = (Seeds_c *)(allSeeds.arr[i]->pDerivedObj);
-            seed->last_watered_time = al_get_time();
+        // ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_c_L);
+        // for (int i = 0; i < allSeeds.len; i++) {
+            // Seeds_c *seed = (Seeds_c *)(allSeeds.arr[i]->pDerivedObj);
+            self->last_watered_time = al_get_time();
             printf("Seeds_c watered\n");
-        }
+        // }
     }
 }
 // 修改 Seeds_c 的繪製函數

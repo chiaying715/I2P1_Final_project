@@ -1,6 +1,12 @@
 #include "sceneManager.h"
 #include "menu.h"
 #include "gamescene.h"
+
+#include "endgame.h"
+#include "success.h"
+#include "about.h"
+
+#include <stdio.h>
 Scene *scene = NULL;
 void create_scene(SceneType type)
 {

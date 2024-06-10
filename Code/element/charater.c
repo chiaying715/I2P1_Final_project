@@ -137,15 +137,19 @@ void Character_update(Elements *self)
                     Seeds_c *seed = (Seeds_c *)(seedElement->pDerivedObj);
                     printf("Seeds id = %d\n", seedElement->id);
                     // 检查角色和种子之间的距离
-                    int distance_x = abs(chara->x - seed->x);
-                    int distance_y = abs(chara->y - seed->y);
-                    int max_distance = 50; // 设置一个距离阈值
-
+                    int distance_x = abs(chara->x-50+chara->width/2 - seed->x);
+                    int distance_y = abs(chara->y+80 - seed->y);
+                    int max_distance = 100; // 设置一个距离阈值
+                    printf("charax = %d charay=%d seedx=%d seedy=%d\n", chara->x-50+chara->width/2, chara->y+80, seed->x, seed->y);
                     /*if (distance_x <= max_distance && distance_y <= max_distance)
                     {
                         water_seeds_c(seedElement); // 为附近的种子浇水
                     }*/
-                   water_seeds_c(seedElement);
+                   if (distance_x <= max_distance)
+                    {
+                        water_seeds_c(seed); // 为附近的种子浇水
+                    }
+                   //water_seeds_c(seedElement);
                 }
             }
         }
