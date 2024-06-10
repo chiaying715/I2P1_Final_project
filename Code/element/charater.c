@@ -98,7 +98,7 @@ void Character_update(Elements *self)
         else if (key_state[ALLEGRO_KEY_1])
         {
             Elements *pro;
-            pro = New_seeds_s(Seeds_s_L, chara->x-30+chara->width/2, chara->y);
+            pro = New_seeds_s(Seeds_s_L, chara->x-30+chara->width/2, chara->y+80);
             _Register_elements(scene, pro);
             //chara->new_proj = true;
             //chara->state = STOP;
@@ -107,7 +107,7 @@ void Character_update(Elements *self)
         else if (key_state[ALLEGRO_KEY_2])
         {
             Elements *pro;
-            pro = New_Seeds_c(Seeds_c_L, chara->x-40+chara->width/2, chara->y);
+            pro = New_Seeds_c(Seeds_c_L, chara->x-40+chara->width/2, chara->y+80);
             _Register_elements(scene, pro);
             //chara->new_proj = true;
             //chara->state = STOP;
@@ -116,7 +116,7 @@ void Character_update(Elements *self)
         else if (key_state[ALLEGRO_KEY_3])
         {
             Elements *pro;
-            pro = New_seeds_e(Seeds_e_L, chara->x-50+chara->width/2, chara->y);
+            pro = New_seeds_e(Seeds_e_L, chara->x-50+chara->width/2, chara->y+80);
             _Register_elements(scene, pro);
             //chara->new_proj = true;
             //chara->state = STOP;
