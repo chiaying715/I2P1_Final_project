@@ -11,7 +11,7 @@ Scene *New_Menu(int label)
     // setting derived object member
     pDerivedObj->font = al_load_ttf_font("assets/font/pirulen.ttf", 12, 0);
     // Load sound
-    pDerivedObj->song = al_load_sample("assets/sound/menu.mp3");
+    pDerivedObj->song = al_load_sample("assets/sound/game_menu_likeyou.mp3");
     al_reserve_samples(20);
     pDerivedObj->sample_instance = al_create_sample_instance(pDerivedObj->song);
     pDerivedObj->title_x = WIDTH / 2;
@@ -34,15 +34,28 @@ void menu_update(Scene *self)
     if (key_state[ALLEGRO_KEY_ENTER])
     {
         self->scene_end = true;
-        window = 1;
+        window = 1; //game scene
+    }
+    else if (key_state[ALLEGRO_KEY_ESCAPE])
+    {
+        self->scene_end = true;
+        window = -1; //exit
+    }
+    //測試用之後要放到endgame scene裡面
+    else if (key_state[ALLEGRO_KEY_CAPSLOCK])
+    {
+        self->scene_end = true;
+        window = 3; //success scene
     }
     return;
 }
 void menu_draw(Scene *self)
 {
     Menu *Obj = ((Menu *)(self->pDerivedObj));
-    al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to start");
-    al_draw_rectangle(Obj->title_x - 150, Obj->title_y - 30, Obj->title_x + 150, Obj->title_y + 30, al_map_rgb(255, 255, 255), 0);
+    al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, -50 + Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to START");
+    al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to ABOUT");
+    al_draw_text(Obj->font, al_map_rgb(255, 255, 255), Obj->title_x, 50+Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to EXIT");
+    al_draw_rectangle(Obj->title_x - 140, Obj->title_y - 55, Obj->title_x + 140, Obj->title_y + 70, al_map_rgb(255, 255, 255), 0);
     al_play_sample_instance(Obj->sample_instance);
 }
 void menu_destroy(Scene *self)

@@ -7,17 +7,19 @@
 #include "../element/teleport.h"
 #include "../element/tree.h"
 #include "../element/projectile.h"
-/*
+#include "../element/trap.h"
+/* 
    [game scene object]
 */
-typedef enum EleType
+typedef enum _EleType_GameScene
 {
     Floor_L,
     Teleport_L,
     Tree_L,
     Character_L,
-    Projectile_L
-} EleType;
+    Projectile_L,
+    Trap_L
+} EleType_GameScene;
 typedef struct _GameScene
 {
     ALLEGRO_BITMAP *background;

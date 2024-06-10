@@ -14,6 +14,7 @@ Scene *New_GameScene(int label)
     _Register_elements(pObj, New_Teleport(Teleport_L));
     _Register_elements(pObj, New_Tree(Tree_L));
     _Register_elements(pObj, New_Character(Character_L));
+    _Register_elements(pObj,New_Trap(Trap_L));
     // setting derived object function
     pObj->Update = game_scene_update;
     pObj->Draw = game_scene_draw;
@@ -50,6 +51,14 @@ void game_scene_update(Scene *self)
         Elements *ele = allEle.arr[i];
         if (ele->dele)
             _Remove_elements(self, ele);
+    }
+    //game scene update: to switch to endgame scene
+    if (Endgamescene_switch_trigger==1)
+    {
+        self->scene_end = true;
+        window = 2;
+        printf("window2\n");
+        return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
     }
 }
 void game_scene_draw(Scene *self)
