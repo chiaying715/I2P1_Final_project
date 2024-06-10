@@ -80,12 +80,12 @@ void Seeds_e_interact(Elements *self, Elements *tar)
     //printf("in seeds_e interact\n");
     Scene *currentScene = scene;
     ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_e_L);
-    if(thief!=0) {
+    if((thief % 100) / 10 != 0) {
         for (int i = 0; i < allSeeds.len; i++) {
             Seeds_e *seed = (Seeds_e *)(allSeeds.arr[i]->pDerivedObj);
             seed->dele = true;
         }
-        thief-=1;
+        thief -= 10;
     }
     else if (tar->label == Character_L&&Obj->is_harvestable&&key_state[ALLEGRO_KEY_H]) {
         Seeds_e *Obj = (Seeds_e *)(self->pDerivedObj);

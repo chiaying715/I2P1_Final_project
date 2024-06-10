@@ -90,7 +90,7 @@ void Seeds_c_interact(Elements *self, Elements *tar)
     Seeds_c *Obj = ((Seeds_c *)(self->pDerivedObj));
     Scene *currentScene = scene;
     ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_c_L);
-    if(thief!=0) {
+    if(thief % 10 != 0) {
         for (int i = 0; i < allSeeds.len; i++) {
             Seeds_c *seed = (Seeds_c *)(allSeeds.arr[i]->pDerivedObj);
             seed->dele = true;
