@@ -15,18 +15,21 @@ Elements *New_Butcher(int label)
     Elements *pObj = New_Elements(label);
     // setting derived object member
     // load Butcher images
-    char state_string[3][10] = {"1", "2", "3"};
-    for (int i = 0; i < 3; i++)
-    {
-        char buffer[50];
-        sprintf(buffer, "assets/image/butcher%s.gif", state_string[i]);
-        pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
-    }
+    // char state_string[3][10] = {"1", "2", "3"};
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     char buffer[50];
+    //     sprintf(buffer, "assets/image/butcher%s.gif", state_string[i]);
+    //     pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
+    // }
+    pDerivedObj->gif_status[0] = algif_new_gif("assets/image/butcher1.gif", -1);
     // initial the geometric information of Butcher
     pDerivedObj->width = pDerivedObj->gif_status[0]->width;
     pDerivedObj->height = pDerivedObj->gif_status[0]->height;
-    pDerivedObj->x = 300;
-    pDerivedObj->y = HEIGHT - pDerivedObj->height - 60;
+    // pDerivedObj->x = 300;
+    // pDerivedObj->y = HEIGHT - pDerivedObj->height - 60;
+    pDerivedObj->x = 0;
+    pDerivedObj->y = 0;
     pDerivedObj->hitbox = New_Rectangle(pDerivedObj->x,
                                         pDerivedObj->y,
                                         pDerivedObj->x + pDerivedObj->width,
@@ -45,8 +48,7 @@ Elements *New_Butcher(int label)
 }
 
 void Butcher_update(Elements *self)
-{
-}
+{}
 
 void Butcher_draw(Elements *self)
 {
@@ -62,8 +64,9 @@ void Butcher_draw(Elements *self)
 void Butcher_destory(Elements *self)
 {
     Butcher *Obj = ((Butcher *)(self->pDerivedObj));
-    for (int i = 0; i < 3; i++)
-        algif_destroy_animation(Obj->gif_status[i]);
+    // for (int i = 0; i < 3; i++)
+    //     algif_destroy_animation(Obj->gif_status[i]);
+    algif_destroy_animation(Obj->gif_status[0]);
     free(Obj->hitbox);
     free(Obj);
     free(self);

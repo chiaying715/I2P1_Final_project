@@ -8,7 +8,7 @@ Scene *New_EndGame(int label)
     EndGame *pDerivedObj = (EndGame *)malloc(sizeof(EndGame));
     Scene *pObj = New_Scene(label);
     // setting derived object member
-    pDerivedObj->background = al_load_bitmap("assets/image/endgame.jpg");
+    pDerivedObj->background = al_load_bitmap("assets/image/endgame.png");
     if (!pDerivedObj->background) {
         printf("Failed to load background image!\n");
         fprintf(stderr, "Failed to load background image!\n");
@@ -18,10 +18,10 @@ Scene *New_EndGame(int label)
     }
     pObj->pDerivedObj = pDerivedObj;
     // register element
+    printf("kkk\n");
     _Register_elements(pObj, New_Butcher(Butcher_L));
+    // _Register_elements(pObj, New_Character(Character_L));
     _Register_elements(pObj, New_Floor(Floor_L));
-    _Register_elements(pObj, New_Teleport(Teleport_L));
-    _Register_elements(pObj, New_Tree(Tree_L));
     _Register_elements(pObj, New_Character(Character_L));
     // setting derived object function
     pObj->Update = end_game_update;
@@ -79,7 +79,7 @@ void end_game_draw(Scene *self)
 {
     al_clear_to_color(al_map_rgb(0, 0, 0));
     EndGame *gs = ((EndGame *)(self->pDerivedObj));
-    al_draw_bitmap(gs->background, 0, 0, 0);
+    al_draw_bitmap(gs->background, 400, 448, 0);
     ElementVec allEle = _Get_all_elements(self);
     for (int i = 0; i < allEle.len; i++)
     {

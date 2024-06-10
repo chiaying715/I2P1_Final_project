@@ -10,15 +10,15 @@ Scene *New_Menu(int label)
     Scene *pObj = New_Scene(label);
     // setting derived object member
     pDerivedObj->font = al_load_ttf_font("assets/font/pirulen.ttf", 12, 0);
-    /*pDerivedObj->background = al_load_bitmap("assets/image/menu.jpg");*/
+    pDerivedObj->background = al_load_bitmap("assets/image/menu.jpg");
 
     ////
     
-    /*if (!pDerivedObj->background) 
+    if (!pDerivedObj->background) 
     {
         fprintf(stderr, "Failed to load image.\n");
         // Handle error...
-    }*/
+    }
     ///
     pObj->pDerivedObj = pDerivedObj;
     // Load sound
@@ -70,19 +70,19 @@ void menu_draw(Scene *self)
     Menu *Obj = ((Menu *)(self->pDerivedObj));
     ////
     al_clear_to_color(al_map_rgb(255, 255, 255));
-    //al_draw_bitmap(Obj->background, 0, 0, 0);
+    al_draw_bitmap(Obj->background, 0, 0, 0);
     ////
-    al_draw_text(Obj->font, al_map_rgb(0, 0, 0), Obj->title_x, -50 + Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to START");
-    al_draw_text(Obj->font, al_map_rgb(0, 0, 0), Obj->title_x, Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to ABOUT");
-    al_draw_text(Obj->font, al_map_rgb(0, 0, 0), Obj->title_x, 50+Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to EXIT");
-    al_draw_rectangle(Obj->title_x - 140, Obj->title_y - 55, Obj->title_x + 140, Obj->title_y + 70, al_map_rgb(0, 0, 0), 0);
+    al_draw_text(Obj->font, al_map_rgb(0, 0, 0), Obj->title_x, -250 + Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Enter' to START");
+    al_draw_text(Obj->font, al_map_rgb(0, 0, 0), Obj->title_x, -200 + Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Home' to ABOUT");
+    al_draw_text(Obj->font, al_map_rgb(0, 0, 0), Obj->title_x, -150 + Obj->title_y, ALLEGRO_ALIGN_CENTRE, "Press 'Esc' to EXIT");
+    al_draw_rectangle(Obj->title_x - 140, Obj->title_y - 55 - 200, Obj->title_x + 140, Obj->title_y + 70 -200, al_map_rgb(0, 0, 0), 0);
     al_play_sample_instance(Obj->sample_instance);
 }
 void menu_destroy(Scene *self)
 {
     Menu *Obj = ((Menu *)(self->pDerivedObj));
-   // ALLEGRO_BITMAP *background = Obj->background;
-    //al_destroy_bitmap(background);
+    ALLEGRO_BITMAP *background = Obj->background;
+    al_destroy_bitmap(background);
     al_destroy_font(Obj->font);
     al_destroy_sample(Obj->song);
     al_destroy_sample_instance(Obj->sample_instance);
