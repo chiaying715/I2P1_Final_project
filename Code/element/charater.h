@@ -26,6 +26,10 @@ typedef struct _Character
     int state;                      // the state of character
     ALGIF_ANIMATION *gif_status[3]; // gif for each state. 0: stop, 1: move, 2:attack
     ALLEGRO_SAMPLE_INSTANCE *atk_Sound;
+    ALLEGRO_SAMPLE_INSTANCE *plt_Sound;
+    ALLEGRO_SAMPLE_INSTANCE *wlk_Sound;
+    ALLEGRO_SAMPLE_INSTANCE *up_Sound;
+    ALLEGRO_SAMPLE_INSTANCE *hvst_Sound;
     int anime;      // counting the time of animation
     int anime_time; // indicate how long the animation
     bool new_proj;
