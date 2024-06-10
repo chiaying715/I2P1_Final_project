@@ -28,6 +28,7 @@ extern ALLEGRO_EVENT event;
 extern ALLEGRO_TIMER *fps;
 extern bool debug_mode;
 int tot_score;
+extern int thief;
 
 void init_event_queue();
 void update_key_state(ALLEGRO_EVENT *event);

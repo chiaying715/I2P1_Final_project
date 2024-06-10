@@ -7,6 +7,7 @@ const int WIDTH = 900;
 const int HEIGHT = 672;
 int window = 0;
 int tot_score = 0;
+int thief = 0;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 //bool key_state[ALLEGRO_KEY_MAX];
 bool key_last_state[ALLEGRO_KEY_MAX];

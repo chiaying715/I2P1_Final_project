@@ -80,7 +80,11 @@ void Seeds_c_update(Elements *self)
 void Seeds_c_interact(Elements *self, Elements *tar)
 {
     Seeds_c *Obj = ((Seeds_c *)(self->pDerivedObj));
-    if (tar->label == Character_L && Obj->is_harvestable && key_state[ALLEGRO_KEY_H]) {
+    if(thief==1) {
+        self->dele = true;
+        thief = 0;
+    }
+    else if (tar->label == Character_L && Obj->is_harvestable && key_state[ALLEGRO_KEY_H]) {
         Character *chara = (Character *)(tar->pDerivedObj);
         
         // 確保物件已標記為可刪除以避免多次計分

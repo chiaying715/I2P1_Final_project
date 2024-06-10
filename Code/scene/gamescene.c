@@ -27,19 +27,23 @@ void switch_background() {
     switch (background_state) {
         case DAY:
             background_state = DUSK1;
-            printf("Change from 'DAY' to 'DUSK1'");
+            thief = 0;
+            printf("Change from 'DAY' to 'DUSK1'.\n");
             break;
         case DUSK1:
             background_state = DUSK2;
-            printf("Change from 'DUSK1' to 'DUSK2'");
+            thief = 0;
+            printf("Change from 'DUSK1' to 'DUSK2'.\n");
             break;
         case DUSK2:
             background_state = NIGHT;
-            printf("Change from 'DUSK2' to 'NIGHT'");
+            thief = 0;
+            printf("Change from 'DUSK2' to 'NIGHT'.\n");
             break;
         case NIGHT:
             background_state = DAY;
-            printf("Change from 'NIGHT' to 'DAY'");
+            thief = 1;
+            printf("Change from 'NIGHT' to 'DAY'.\n");
             break;
         default:
             break;
