@@ -18,6 +18,7 @@ Scene *New_EndGame(int label)
     }
     pObj->pDerivedObj = pDerivedObj;
     // register element
+    _Register_elements(pObj, New_Butcher(Butcher_L));
     _Register_elements(pObj, New_Floor(Floor_L));
     _Register_elements(pObj, New_Teleport(Teleport_L));
     _Register_elements(pObj, New_Tree(Tree_L));

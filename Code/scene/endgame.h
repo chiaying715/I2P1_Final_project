@@ -7,6 +7,7 @@
 #include "../element/teleport.h"
 #include "../element/tree.h"
 #include "../element/projectile.h"
+#include "../element/butcher.h"
 /*
    [game scene object]
 */
@@ -23,7 +24,6 @@ typedef enum EleType
 typedef struct _EndGame
 {
     ALLEGRO_BITMAP *background;
-
 } EndGame;
 Scene *New_EndGame(int label);
 void end_game_update(Scene *self);

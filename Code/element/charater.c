@@ -49,6 +49,7 @@ Elements *New_Character(int label)
     pObj->Destroy = Character_destory;
     return pObj;
 }
+
 void Character_update(Elements *self)
 {
     // use the idea of finite state machine to deal with different state
@@ -124,6 +125,7 @@ void Character_update(Elements *self)
         }
     }
 }
+
 void Character_draw(Elements *self)
 {
     // with the state, draw corresponding image
@@ -138,6 +140,7 @@ void Character_draw(Elements *self)
         al_play_sample_instance(chara->atk_Sound);
     }
 }
+
 void Character_destory(Elements *self)
 {
     Character *Obj = ((Character *)(self->pDerivedObj));
