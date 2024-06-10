@@ -55,7 +55,7 @@ void Trap_interact(Elements *self, Elements *tar)
 {
     //added
     
-    if (tot_score >= 400)
+    if (tot_score >= 5)
     {
         printf("Success!\n");
         Success_switch_trigger = 1;
