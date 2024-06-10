@@ -24,7 +24,7 @@ Elements *New_Butcher(int label)
     //     pDerivedObj->gif_status[i] = algif_new_gif(buffer, -1);
     // }
     printf("before load butcher gif\n");
-    pDerivedObj->gif_status[0] = algif_new_gif("assets/image/chara_farmer.gif", -1);
+    pDerivedObj->gif_status[0] = algif_new_gif("assets/image/chara_farmer_re.gif", -1);
     // initial the geometric information of Butcher
     printf("before init butcher's geo info\n");
     pDerivedObj->width = pDerivedObj->gif_status[0]->width;
@@ -32,8 +32,8 @@ Elements *New_Butcher(int label)
     printf("before setting butcher's position\n");
     // pDerivedObj->x = 300;
     // pDerivedObj->y = HEIGHT - pDerivedObj->height - 60;
-    pDerivedObj->x = 0;
-    pDerivedObj->y = 0;
+    pDerivedObj->x = 335;
+    pDerivedObj->y = 255;
     printf("before create new hitbox\n");
     pDerivedObj->hitbox = New_Rectangle(pDerivedObj->x,
                                         pDerivedObj->y,
