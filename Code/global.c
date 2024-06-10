@@ -15,3 +15,6 @@ Point mouse;
 bool debug_mode = true;
 int Endgamescene_switch_trigger = 0;
 int tot_score = 0;
+////
+int Success_switch_trigger = 0;
+////

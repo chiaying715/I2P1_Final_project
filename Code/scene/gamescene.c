@@ -147,6 +147,14 @@ void game_scene_update(Scene *self)
         printf("window2\n");
         return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
     }
+    //game scene update: to switch to endgame scene
+    else if (Success_switch_trigger==1)
+    {
+        self->scene_end = true;
+        window = 3;
+        printf("window3\n");
+        return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
+    }
 }
 void game_scene_draw(Scene *self)
 {

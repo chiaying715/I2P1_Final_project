@@ -31,7 +31,7 @@ Scene *New_About(int label)
     pObj->pDerivedObj = pDerivedObj;
 
     // setting derived object function
-    pDerivedObj->background = al_load_bitmap("assets/image/success.jpg");
+    pDerivedObj->background = al_load_bitmap("assets/image/about.png");
     ///////////////////////
     // setting derived object function
     pObj->Update = About_update;
@@ -70,10 +70,10 @@ void About_update(Scene *self)
         if (ele->dele)
             _Remove_elements(self, ele);
     }
-    if (key_state[ALLEGRO_KEY_ENTER])
+    if (key_state[ALLEGRO_KEY_BACKSPACE])
     {
         self->scene_end = true;
-        window = 1; //game scene
+        window = 0; //MENU
     }
     else if (key_state[ALLEGRO_KEY_ESCAPE])
     {

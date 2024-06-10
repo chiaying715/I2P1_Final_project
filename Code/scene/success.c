@@ -1,4 +1,3 @@
-
 #include <allegro5/allegro_primitives.h>
 #include "endgame.h"
 //#include "gamescene.h"
@@ -39,7 +38,7 @@ Scene *New_Success(int label)
 
     // register element
     printf("New_Test1\n");
-    //_Register_elements(pObj, New_Test(Success_chara_L));
+    _Register_elements(pObj, New_Test(Success_chara_L));
     
     // setting derived object function
     pObj->Update = Success_update;

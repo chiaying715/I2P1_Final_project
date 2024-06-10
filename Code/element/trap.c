@@ -53,6 +53,15 @@ void Trap_update(Elements *self)
 }
 void Trap_interact(Elements *self, Elements *tar)
 {
+    //added
+    
+    if (tot_score >= 400)
+    {
+        printf("Success!\n");
+        Success_switch_trigger = 1;
+    }
+    
+    ////////////////////
     if (tar->label == Character_L)
     {
         Character *chara = (Character *)(tar->pDerivedObj);

@@ -8,7 +8,7 @@
 #include "../element/tree.h"
 #include "../element/projectile.h"
 #include "../element/success_chara.h"
-//#include "../element/test.h"
+#include "../element/test.h"
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 /*

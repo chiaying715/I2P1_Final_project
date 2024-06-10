@@ -7,20 +7,21 @@
 #include "../element/teleport.h"
 #include "../element/tree.h"
 #include "../element/projectile.h"
-//#include "../element/butcher.h"
+#include "../element/butcher.h"
 /*
    [game scene object]
 */
-/*
-typedef enum EleType
-{
-    Floor_L,
-    Teleport_L,
-    Tree_L,
-    Character_L,
-    Projectile_L,
-    Trap_L
-} EleType;*/
+
+// typedef enum _EleType_EndGame
+// {
+//     Floor_L,
+//     Teleport_L,
+//     Tree_L,
+//     Character_L,
+//     Projectile_L,
+//     Trap_L,
+//     Butcher_L
+// } EleType_EndGame;
 typedef struct _EndGame
 {
     ALLEGRO_BITMAP *background;

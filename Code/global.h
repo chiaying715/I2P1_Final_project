@@ -26,4 +26,5 @@ extern ALLEGRO_TIMER *fps;
 extern bool debug_mode;
 int tot_score;
 int Endgamescene_switch_trigger;
+int Success_switch_trigger;
 #endif
