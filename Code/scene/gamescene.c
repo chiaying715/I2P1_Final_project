@@ -112,8 +112,10 @@ void game_scene_update(Scene *self)
 
    ALLEGRO_EVENT ev;
     while (al_get_next_event(event_queue, &ev)) {
+        printf("%d", elapsed_time);
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             elapsed_time++;
+            //printf("%d", elapsed_time);
             int current_duration = 0;
             switch (background_state) {
                 case DAY:
@@ -130,6 +132,7 @@ void game_scene_update(Scene *self)
                     break;
             }
             if (elapsed_time >= current_duration) {
+                //printf("%d", elapsed_time);
                 switch_background();
                 elapsed_time = 0;
             }
