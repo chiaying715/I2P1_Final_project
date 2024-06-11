@@ -17,6 +17,7 @@ enum BackgroundState {
     NIGHT
 };
 
+ALLEGRO_EVENT_QUEUE *timer_queue;
 // 全局變量
 enum BackgroundState background_state = DAY;
 int elapsed_time = 0;
@@ -29,20 +30,24 @@ void switch_background() {
             printf("day\n");
             background_state = DUSK1;
             printf("Change from 'DAY' to 'DUSK1'");
+            thief = 0;
             break;
         case DUSK1:
             printf("dusk1\n");
             background_state = DUSK2;
+            thief = 0;
             printf("Change from 'DUSK1' to 'DUSK2'");
             break;
         case DUSK2:
             printf("dusk2\n");
             background_state = NIGHT;
+            thief = 0;
             printf("Change from 'DUSK2' to 'NIGHT'");
             break;
         case NIGHT:
             printf("night\n");
             background_state = DAY;
+            thief = 111;
             printf("Change from 'NIGHT' to 'DAY'");
             break;
         default:
@@ -67,16 +72,18 @@ Scene *New_GameScene(int label)
     pDerivedObj->lastTreeTime = 0.0;
     _Register_elements(pObj, New_Tree(Tree_L));
     _Register_elements(pObj, New_Character(Character_L));
-    printf("into chara\n");
+    //printf("into chara\n");
     _Register_elements(pObj, New_Trap(Trap_L));
-    printf("into trap\n");
+    //printf("into trap\n");
     // setting derived object function
     pObj->Update = game_scene_update;
     pObj->Draw = game_scene_draw;
     pObj->Destroy = game_scene_destroy;
     // 初始化事件队列和定时器
-    timer = al_create_timer(1.0);
-    al_register_event_source(event_queue, al_get_timer_event_source(timer));
+    //timer = al_create_timer(1.0);
+    timer = al_create_timer(0.3);
+    timer_queue = al_create_event_queue();
+    al_register_event_source(timer_queue, al_get_timer_event_source(timer));
     al_start_timer(timer);
     return pObj;
 }
@@ -91,7 +98,7 @@ void game_scene_update(Scene *self)
         gs->lastTreeTime = now; // 更新上次生成樹木的時間
     }
    ALLEGRO_EVENT ev;
-    while (al_get_next_event(event_queue, &ev)) {
+    while (al_get_next_event(timer_queue, &ev)) {
         if (ev.type == ALLEGRO_EVENT_TIMER) {
             elapsed_time++;
             int current_duration = 0;
@@ -144,7 +151,7 @@ void game_scene_update(Scene *self)
     {
         self->scene_end = true;
         window = 2;
-        printf("window2\n");
+        //printf("window2\n");
         return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
     }
     //game scene update: to switch to endgame scene
@@ -152,7 +159,7 @@ void game_scene_update(Scene *self)
     {
         self->scene_end = true;
         window = 3;
-        printf("window3\n");
+        //printf("window3\n");
         return; //要嗎?雖然我不知道return 完可以去哪裡QAQ
     }
 }

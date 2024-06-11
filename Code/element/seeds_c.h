@@ -24,6 +24,7 @@ typedef struct _Seeds_c
     int countdown; // 倒數時間
     ALLEGRO_EVENT_QUEUE *event_queue; // 新增事件佇列成員
     double minus; //踩到肥料
+    int dele;
 } Seeds_c;
 Elements *New_Seeds_c(int label, int x, int y);
 void reduce_seeds_c_countdown() ;

@@ -49,7 +49,7 @@ void Trap_update(Elements *self)
     {
         Obj->activate = false;
     }
-    printf("activate: %d\n", Obj->activate);
+    //printf("activate: %d\n", Obj->activate);
 }
 void Trap_interact(Elements *self, Elements *tar)
 {
@@ -57,7 +57,7 @@ void Trap_interact(Elements *self, Elements *tar)
     
     if (tot_score >= 5)
     {
-        printf("Success!\n");
+        //printf("Success!\n");
         Success_switch_trigger = 1;
     }
     
@@ -66,14 +66,14 @@ void Trap_interact(Elements *self, Elements *tar)
     {
         Character *chara = (Character *)(tar->pDerivedObj);
         Trap *Obj = (Trap *)(self->pDerivedObj);
-        printf("chara->x=%d, Obj=%d, %d\n", chara->x, 65 + Obj->x - Obj->width, Obj->x + Obj->width);
+        //printf("chara->x=%d, Obj=%d, %d\n", chara->x, 65 + Obj->x - Obj->width, Obj->x + Obj->width);
         // if ((chara->x >= 65 + Obj->x - Obj->width)&&
         //     (chara->x <= Obj->x + Obj->width)&&(chara->y >= HEIGHT - Obj->height - 150))
         if ((chara->x >= 65 + Obj->x - Obj->width)&&
             (chara->x <= Obj->x + Obj->width))
         {
             Endgamescene_switch_trigger = 1;
-            printf("!!\n");
+            //printf("!!\n");
         }
         /*if (chara->x >= Obj->x &&
             chara->x <= Obj->x + Obj->width &&

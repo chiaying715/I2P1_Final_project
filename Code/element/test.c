@@ -31,7 +31,7 @@ void Test_update(Elements *self)
     if (key_state[ALLEGRO_KEY_INSERT])
     {
         Obj->activate = true;
-        printf("activate\n");
+        //printf("activate\n");
     }
     else
     {

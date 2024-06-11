@@ -98,8 +98,10 @@ void Character_update(Elements *self)
         else if (key_state[ALLEGRO_KEY_1])
         {
             Elements *pro;
+            //printf("strawid:%d\n", pro->id);
             pro = New_seeds_s(Seeds_s_L, chara->x-30+chara->width/2, chara->y+80);
             _Register_elements(scene, pro);
+            printf("strawid:%d\n", pro->id);
             //chara->new_proj = true;
             //chara->state = STOP;
             chara->state = MOVE;
@@ -107,8 +109,10 @@ void Character_update(Elements *self)
         else if (key_state[ALLEGRO_KEY_2])
         {
             Elements *pro;
+            //printf("cornid:%d\n", pro->id);
             pro = New_Seeds_c(Seeds_c_L, chara->x-40+chara->width/2, chara->y+80);
             _Register_elements(scene, pro);
+            printf("cornid:%d\n", pro->id);
             //chara->new_proj = true;
             //chara->state = STOP;
             chara->state = MOVE;
@@ -118,6 +122,7 @@ void Character_update(Elements *self)
             Elements *pro;
             pro = New_seeds_e(Seeds_e_L, chara->x-50+chara->width/2, chara->y+80);
             _Register_elements(scene, pro);
+            printf("eegid:%d\n", pro->id);
             //chara->new_proj = true;
             //chara->state = STOP;
             chara->state = MOVE;
@@ -130,10 +135,10 @@ void Character_update(Elements *self)
             if (currentScene != NULL)
             {
                 
-                ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_c_L);
-                for (int i = 0; i < allSeeds.len; i++)
+                ElementVec allSeeds_c = _Get_label_elements(currentScene, Seeds_c_L);
+                for (int i = 0; i < allSeeds_c.len; i++)
                 {
-                    Elements *seedElement = allSeeds.arr[i];
+                    Elements *seedElement = allSeeds_c.arr[i];
                     Seeds_c *seed = (Seeds_c *)(seedElement->pDerivedObj);
                     printf("Seeds id = %d\n", seedElement->id);
                     // 检查角色和种子之间的距离
@@ -148,6 +153,48 @@ void Character_update(Elements *self)
                    if (distance_x <= max_distance)
                     {
                         water_seeds_c(seed); // 为附近的种子浇水
+                    }
+                   //water_seeds_c(seedElement);
+                }
+                ElementVec allSeeds_e = _Get_label_elements(currentScene, Seeds_e_L);
+                for (int i = 0; i < allSeeds_e.len; i++)
+                {
+                    Elements *seedElement = allSeeds_e.arr[i];
+                    seeds_e *seed = (seeds_e *)(seedElement->pDerivedObj);
+                    printf("Seeds id = %d\n", seedElement->id);
+                    // 检查角色和种子之间的距离
+                    int distance_x = abs(chara->x-50+chara->width/2 - seed->x);
+                    int distance_y = abs(chara->y+80 - seed->y);
+                    int max_distance = 100; // 设置一个距离阈值
+                    printf("charax = %d charay=%d seedx=%d seedy=%d\n", chara->x-50+chara->width/2, chara->y+80, seed->x, seed->y);
+                    /*if (distance_x <= max_distance && distance_y <= max_distance)
+                    {
+                        water_seeds_c(seedElement); // 为附近的种子浇水
+                    }*/
+                   if (distance_x <= max_distance)
+                    {
+                        water_seeds_e(seed);
+                    }
+                   //water_seeds_c(seedElement);
+                }
+                ElementVec allSeeds_s = _Get_label_elements(currentScene, Seeds_s_L);
+                for (int i = 0; i < allSeeds_s.len; i++)
+                {
+                    Elements *seedElement = allSeeds_s.arr[i];
+                    seeds_s *seed = (seeds_s *)(seedElement->pDerivedObj);
+                    printf("Seeds id = %d\n", seedElement->id);
+                    // 检查角色和种子之间的距离
+                    int distance_x = abs(chara->x-50+chara->width/2 - seed->x);
+                    int distance_y = abs(chara->y+80 - seed->y);
+                    int max_distance = 100; // 设置一个距离阈值
+                    printf("charax = %d charay=%d seedx=%d seedy=%d\n", chara->x-50+chara->width/2, chara->y+80, seed->x, seed->y);
+                    /*if (distance_x <= max_distance && distance_y <= max_distance)
+                    {
+                        water_seeds_c(seedElement); // 为附近的种子浇水
+                    }*/
+                   if (distance_x <= max_distance)
+                    {
+                        water_seeds_s(seed);
                     }
                    //water_seeds_c(seedElement);
                 }

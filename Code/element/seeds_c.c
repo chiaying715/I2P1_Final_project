@@ -14,13 +14,13 @@ Elements *New_Seeds_c(int label, int x, int y)
 {
     Seeds_c *pDerivedObj = (Seeds_c *)malloc(sizeof(Seeds_c));
     if (!pDerivedObj) {
-        printf("Error: Failed to allocate memory for Seeds_c object\n");
+        //printf("Error: Failed to allocate memory for Seeds_c object\n");
         return NULL;
     }
     Elements *pObj = New_Elements(label);
     if (!pObj) {
         free(pDerivedObj); // 释放 Seeds_c 对象的内存
-        printf("Error: Failed to allocate memory for Elements object\n");
+        //printf("Error: Failed to allocate memory for Elements object\n");
         return NULL;
     }
     
@@ -40,7 +40,7 @@ Elements *New_Seeds_c(int label, int x, int y)
                                      pDerivedObj->y + pDerivedObj->height / 2,
                                      min(pDerivedObj->width, pDerivedObj->height) / 2);
     if (!pDerivedObj->hitbox) {
-        printf("Error: Failed to create circle\n");
+        //printf("Error: Failed to create circle\n");
         al_destroy_bitmap(pDerivedObj->img);
         free(pDerivedObj);
         free(pObj);
@@ -49,6 +49,7 @@ Elements *New_Seeds_c(int label, int x, int y)
     pDerivedObj->plant_time = al_get_time();
     pDerivedObj->is_harvestable = false;
     pDerivedObj->score = 5;
+    pDerivedObj->dele = 0;
     pDerivedObj->font = al_create_builtin_font();
     if (!pDerivedObj->font) {
         printf("Error: Failed to create font\n");
@@ -60,7 +61,7 @@ Elements *New_Seeds_c(int label, int x, int y)
     }
     pDerivedObj->timer = al_create_timer(1.0);
     if (!pDerivedObj->timer) {
-        printf("Error: Failed to create timer\n");
+        //printf("Error: Failed to create timer\n");
         al_destroy_bitmap(pDerivedObj->img);
         free(pDerivedObj->hitbox);
         al_destroy_font(pDerivedObj->font);
@@ -73,7 +74,7 @@ Elements *New_Seeds_c(int label, int x, int y)
     pDerivedObj->last_watered_time = al_get_time();
     pDerivedObj->event_queue = al_create_event_queue();
     if (!pDerivedObj->event_queue) {
-        printf("Error: Failed to create event queue\n");
+        //printf("Error: Failed to create event queue\n");
         al_destroy_bitmap(pDerivedObj->img);
         free(pDerivedObj->hitbox);
         al_destroy_font(pDerivedObj->font);
@@ -84,7 +85,7 @@ Elements *New_Seeds_c(int label, int x, int y)
     }
     al_register_event_source(pDerivedObj->event_queue, al_get_timer_event_source(pDerivedObj->timer));
     al_start_timer(pDerivedObj->timer);
-
+    pObj->dele = 0;
     pObj->inter_obj[pObj->inter_len++] = Character_L;
     pObj->pDerivedObj = pDerivedObj;
     pObj->Update = Seeds_c_update;
@@ -105,12 +106,30 @@ void Seeds_c_update(Elements *self)
             double elapsed_time = current_time - Obj->plant_time;
             double time_since_last_watered = current_time - Obj->last_watered_time;
 
-           if (time_since_last_watered >= 10.0) {
-                printf("Seeds_c object has not been watered for 60 seconds and will be destroyed\n");
+            if(Obj->dele){
+                printf("seeds_c_delete_ntd:%d\n", self->id);
+                self->dele=1;
+                Obj->dele=0;
+            }
+            //else{
+                //add
+                //printf("noselfdele:%d\n", self->id);                
+                //self->dele = false;
+                //add
+            //}
+            if (time_since_last_watered >= 30.0) {
+                //printf("Seeds_c object has not been watered for 60 seconds and will be destroyed\n");
                 self->dele = true; // 标记为删除
+                printf("seeds_c_delete_nowater:%d\n", self->id);
                 Obj->last_watered_time = current_time;
                 return;
             }
+            //else{
+                //add
+                //printf("noselfdele:%d\n", self->id);                
+                //self->dele = false;
+                //add
+            //}
 
             if (elapsed_time >= 50.0) {
                 Obj->is_harvestable = true;
@@ -142,17 +161,31 @@ void Seeds_c_interact(Elements *self, Elements *tar)
         al_start_timer(Obj->timer); // 重启计时器
     }
     */
-    if (tar->label == Character_L&&Obj->is_harvestable&&key_state[ALLEGRO_KEY_H]) {
+    Scene *currentScene = scene;
+    ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_c_L);
+    if(thief % 10 != 0)  {
+            for (int i = 0; i < allSeeds.len; i++) {
+                Seeds_c *seed = (Seeds_c *)(allSeeds.arr[i]->pDerivedObj);
+                seed->dele = true;
+                printf("seeds_c_delete_thief:%d\n", self->id);
+            }
+        thief -= 1;
+    }
+    else if (tar->label == Character_L&&Obj->is_harvestable&&key_state[ALLEGRO_KEY_H]) {
         Seeds_c *Obj = (Seeds_c *)(self->pDerivedObj);
         Character *chara = (Character *)(tar->pDerivedObj);
         if (chara->hitbox->overlap(chara->hitbox, Obj->hitbox))
         {
             self->dele = true;
+            printf("seeds_c_delete_harvest:%d\n", self->id);
             tot_score += Obj->score;
             //printf("-10s\n"); // 打印 -10s
         }
         // 检查是否碰撞
         else {
+            //add
+            //self->dele = false;
+            //add
             //printf("No collision detected\n"); // 没有检测到碰撞
         }
     }
@@ -165,7 +198,7 @@ void reduce_seeds_c_countdown() {
             Seeds_c *seed = (Seeds_c *)(allSeeds.arr[i]->pDerivedObj);
             seed->minus += 10;
             //seed->last_watered_time = 0;
-            printf("Seeds_c countdown reduced by 10\n");
+            //printf("Seeds_c countdown reduced by 10\n");
         }
     }
 }
@@ -177,7 +210,7 @@ void water_seeds_c(Seeds_c *self) {
         // for (int i = 0; i < allSeeds.len; i++) {
             // Seeds_c *seed = (Seeds_c *)(allSeeds.arr[i]->pDerivedObj);
             self->last_watered_time = al_get_time();
-            printf("Seeds_c watered\n");
+            //printf("Seeds_c watered\n");
         // }
     }
 }

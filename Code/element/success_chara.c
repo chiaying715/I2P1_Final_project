@@ -30,7 +30,7 @@ Elements *New_Success_Character(int label)
     pDerivedObj->height = pDerivedObj->gif_status[0]->height;
     pDerivedObj->x = 300;
     pDerivedObj->y = HEIGHT - pDerivedObj->height ;//- 60;
-    printf("h:%d objecth:%d\n", HEIGHT, pDerivedObj->height);
+    //printf("h:%d objecth:%d\n", HEIGHT, pDerivedObj->height);
     pDerivedObj->hitbox = New_Rectangle(pDerivedObj->x,
                                         pDerivedObj->y,
                                         pDerivedObj->x + pDerivedObj->width,

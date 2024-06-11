@@ -14,20 +14,20 @@ Elements *New_seeds_s(int label, int x, int y)
 {
     seeds_s *pDerivedObj = (seeds_s *)malloc(sizeof(seeds_s));
     if (!pDerivedObj) {
-        printf("Error: Failed to allocate memory for seeds_s object\n");
+        //printf("Error: Failed to allocate memory for seeds_s object\n");
         return NULL;
     }
     Elements *pObj = New_Elements(label);
     if (!pObj) {
         free(pDerivedObj); // 释放 seeds_s 对象的内存
-        printf("Error: Failed to allocate memory for Elements object\n");
+        //printf("Error: Failed to allocate memory for Elements object\n");
         return NULL;
     }
     
     // 初始化种子对象的成员变量
     pDerivedObj->img = al_load_bitmap("assets/image/seeds_s.webp");
     if (!pDerivedObj->img) {
-        printf("Error: Failed to load bitmap\n");
+        //printf("Error: Failed to load bitmap\n");
         free(pDerivedObj);
         free(pObj);
         return NULL;
@@ -40,7 +40,7 @@ Elements *New_seeds_s(int label, int x, int y)
                                      pDerivedObj->y + pDerivedObj->height / 2,
                                      min(pDerivedObj->width, pDerivedObj->height) / 2);
     if (!pDerivedObj->hitbox) {
-        printf("Error: Failed to create circle\n");
+        //printf("Error: Failed to create circle\n");
         al_destroy_bitmap(pDerivedObj->img);
         free(pDerivedObj);
         free(pObj);
@@ -49,9 +49,10 @@ Elements *New_seeds_s(int label, int x, int y)
     pDerivedObj->plant_time = al_get_time();
     pDerivedObj->is_harvestable = false;
     pDerivedObj->score = 20;
+    pDerivedObj->dele = 0;
     pDerivedObj->font = al_create_builtin_font();
     if (!pDerivedObj->font) {
-        printf("Error: Failed to create font\n");
+        //printf("Error: Failed to create font\n");
         al_destroy_bitmap(pDerivedObj->img);
         free(pDerivedObj->hitbox);
         free(pDerivedObj);
@@ -59,8 +60,9 @@ Elements *New_seeds_s(int label, int x, int y)
         return NULL;
     }
     pDerivedObj->timer = al_create_timer(1.0);
+    //pDerivedObj->timer = al_create_timer(0.1);
     if (!pDerivedObj->timer) {
-        printf("Error: Failed to create timer\n");
+        //printf("Error: Failed to create timer\n");
         al_destroy_bitmap(pDerivedObj->img);
         free(pDerivedObj->hitbox);
         al_destroy_font(pDerivedObj->font);
@@ -70,10 +72,10 @@ Elements *New_seeds_s(int label, int x, int y)
     }
     pDerivedObj->countdown = 160;
     pDerivedObj->minus = 0;
-    //pDerivedObj->last_watered_time = al_get_time();
+    pDerivedObj->last_watered_time = al_get_time();
     pDerivedObj->event_queue = al_create_event_queue();
     if (!pDerivedObj->event_queue) {
-        printf("Error: Failed to create event queue\n");
+        //printf("Error: Failed to create event queue\n");
         al_destroy_bitmap(pDerivedObj->img);
         free(pDerivedObj->hitbox);
         al_destroy_font(pDerivedObj->font);
@@ -87,6 +89,7 @@ Elements *New_seeds_s(int label, int x, int y)
 
     pObj->inter_obj[pObj->inter_len++] = Character_L;
     pObj->pDerivedObj = pDerivedObj;
+    pObj->dele= 0;
     pObj->Update = seeds_s_update;
     pObj->Interact = Seeds_s_interact;
     pObj->Draw = seeds_s_draw;
@@ -100,17 +103,29 @@ void seeds_s_update(Elements *self)
     seeds_s *Obj = ((seeds_s *)(self->pDerivedObj));
     ALLEGRO_EVENT ev;
     while (al_get_next_event(Obj->event_queue, &ev)) { // 获取下一个事件
-        if (ev.type == ALLEGRO_EVENT_TIMER) {
+            if (ev.type == ALLEGRO_EVENT_TIMER) {
             double current_time = al_get_time();
             double elapsed_time = current_time - Obj->plant_time;
-            //double time_since_last_watered = current_time - Obj->last_watered_time;
+            double time_since_last_watered = current_time - Obj->last_watered_time;
 
-           /*if (time_since_last_watered >= 10.0) {
-                printf("seeds_s object has not been watered for 60 seconds and will be destroyed\n");
+            if(Obj->dele){
+                printf("seeds_s_delete_ntd:%d\n", self->id);
+                self->dele=1;
+                Obj->dele=0;
+            }
+
+            if (time_since_last_watered >= 30.0) {
+                //printf("seeds_s object has not been watered for 60 seconds and will be destroyed\n");
+                printf("seeds_s_delete_nowater:%d\n", self->id);
                 self->dele = true; // 标记为删除
                 Obj->last_watered_time = current_time;
                 return;
-            }*/
+            }
+            //else{
+                //add
+                //self->dele = false;
+                //add
+            //}
 
             if (elapsed_time >= 160.0) {
                 Obj->is_harvestable = true;
@@ -142,17 +157,32 @@ void Seeds_s_interact(Elements *self, Elements *tar)
         al_start_timer(Obj->timer); // 重启计时器
     }
     */
-    if (tar->label == Character_L&&Obj->is_harvestable&&key_state[ALLEGRO_KEY_H]) {
+    Scene *currentScene = scene;
+    ElementVec allSeeds = _Get_label_elements(currentScene, Seeds_s_L);
+    if(thief / 100 != 0) {
+        //printf("thief\n");
+        for (int i = 0; i < allSeeds.len; i++) {
+            seeds_s *seed = (seeds_s *)(allSeeds.arr[i]->pDerivedObj);
+            printf("seeds_s_delete_thief:%d\n", self->id);
+            seed->dele = true;
+        }
+        thief -= 100;
+    }
+    else if (tar->label == Character_L&&Obj->is_harvestable&&key_state[ALLEGRO_KEY_H]) {
         seeds_s *Obj = (seeds_s *)(self->pDerivedObj);
         Character *chara = (Character *)(tar->pDerivedObj);
         if (chara->hitbox->overlap(chara->hitbox, Obj->hitbox))
         {
+            printf("seeds_s_delete_harvest:%d\n", self->id);
             self->dele = true;
             tot_score += Obj->score;
             //printf("-10s\n"); // 打印 -10s
         }
         // 检查是否碰撞
         else {
+            //add
+            //self->dele = false;
+            //add
             //printf("No collision detected\n"); // 没有检测到碰撞
         }
     }
@@ -166,23 +196,22 @@ void reduce_seeds_s_countdown() {
             seeds_s *seed = (seeds_s *)(allSeeds.arr[i]->pDerivedObj);
             seed->minus += 10;
             //seed->last_watered_time = 0;
-            printf("seeds_s countdown reduced by 10\n");
+            //printf("seeds_s countdown reduced by 10\n");
         }
     }
 }
 
-/*void water_seeds_s(Elements *self) {
+void water_seeds_s(seeds_s *self) {
     Scene *currentScene = scene;
     if (currentScene != NULL) {
-        ElementVec allSeeds = _Get_label_elements(currentScene, seeds_s_L);
-        for (int i = 0; i < allSeeds.len; i++) {
-            seeds_s *seed = (seeds_s *)(allSeeds.arr[i]->pDerivedObj);
-            seed->last_watered_time = al_get_time();
-            printf("seeds_s watered\n");
-        }
+        //ElementVec allSeeds = _Get_label_elements(currentScene, seeds_s_L);
+        //for (int i = 0; i < allSeeds.len; i++) {
+            //seeds_s *seed = (seeds_s *)(allSeeds.arr[i]->pDerivedObj);
+            self->last_watered_time = al_get_time();
+            //printf("seeds_s watered\n");
     }
 }
-*/
+
 // 修改 seeds_s 的繪製函數
 void seeds_s_draw(Elements *self) 
 {

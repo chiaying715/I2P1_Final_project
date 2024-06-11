@@ -50,7 +50,7 @@ void execute(Game *self)
         }
         case ALLEGRO_EVENT_KEY_DOWN:
         {
-            printf("Press key code: %d\n", event.keyboard.keycode);
+            //printf("Press key code: %d\n", event.keyboard.keycode);
             key_state[event.keyboard.keycode] = true;
             break;
         }

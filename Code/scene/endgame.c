@@ -19,7 +19,7 @@ Scene *New_EndGame(int label)
     }
     pObj->pDerivedObj = pDerivedObj;
     // register element
-    printf("before register butcher\n");
+    //printf("before register butcher\n");
     Elements* tmp = New_Butcher(Butcher_L);
     if (tmp == NULL) printf("Null err\n"); 
     _Register_elements(pObj, tmp/*New_Butcher(Butcher_L)*/);

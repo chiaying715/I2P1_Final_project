@@ -27,4 +27,5 @@ extern bool debug_mode;
 int tot_score;
 int Endgamescene_switch_trigger;
 int Success_switch_trigger;
+extern int thief;
 #endif

@@ -21,9 +21,9 @@ Scene *New_About(int label)
     ///////////
     al_play_sample_instance(pDerivedObj->sample_instance);
     if (al_get_sample_instance_playing(pDerivedObj->sample_instance )) {
-    printf("The sample instance is playing.\n");
+    //printf("The sample instance is playing.\n");
 } else {
-    printf("The sample instance is not playing.\n");
+    //printf("The sample instance is not playing.\n");
 }
     ///////////
     // set the volume of instance

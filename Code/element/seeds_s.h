@@ -24,10 +24,12 @@ typedef struct _seeds_s
     int countdown; // 倒數時間
     ALLEGRO_EVENT_QUEUE *event_queue; // 新增事件佇列成員
     double minus; //踩到肥料
+    int dele;
+    //double last_watered_time;
 } seeds_s;
 Elements *New_seeds_s(int label, int x, int y);
 void reduce_seeds_s_countdown() ;
-void water_seeds_s(Elements *self);
+void water_seeds_s(seeds_s *self);
 void seeds_s_update(Elements *self);
 void Seeds_s_interact(Elements *self, Elements *tar);
 void seeds_s_draw(Elements *self);
