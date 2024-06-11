@@ -221,6 +221,7 @@ void game_scene_destroy(Scene *self)
         ele->Destroy(ele);
     }
     al_destroy_timer(timer);
+    al_destroy_event_queue(timer_queue);
     free(Obj);
     free(self);
 }
