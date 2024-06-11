@@ -92,7 +92,7 @@ void game_scene_update(Scene *self)
     GameScene *gs = (GameScene *)(self->pDerivedObj);
     double now = al_get_time(); // 獲取當前時間
 
-    if (now - gs->lastTreeTime >= 30.0) // 檢查是否已經過了十秒
+    if (now - gs->lastTreeTime >= 20.0) // 檢查是否已經過了十秒
     {
         _Register_elements(self, New_Tree(Tree_L)); // 添加新的樹木物件
         gs->lastTreeTime = now; // 更新上次生成樹木的時間
