@@ -80,8 +80,8 @@ Scene *New_GameScene(int label)
     pObj->Draw = game_scene_draw;
     pObj->Destroy = game_scene_destroy;
     // 初始化事件队列和定时器
-    //timer = al_create_timer(1.0);
-    timer = al_create_timer(0.3);
+    timer = al_create_timer(1.0);
+    //timer = al_create_timer(0.3);
     timer_queue = al_create_event_queue();
     al_register_event_source(timer_queue, al_get_timer_event_source(timer));
     al_start_timer(timer);

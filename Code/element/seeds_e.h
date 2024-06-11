@@ -17,6 +17,7 @@ typedef struct _seeds_e
     double last_watered_time;
     double plant_time;
     bool is_harvestable;
+    bool is_dying;
     int score; // 添加積分值變量
     // 新增成員變數
     ALLEGRO_FONT *font;

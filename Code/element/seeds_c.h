@@ -25,6 +25,7 @@ typedef struct _Seeds_c
     ALLEGRO_EVENT_QUEUE *event_queue; // 新增事件佇列成員
     double minus; //踩到肥料
     int dele;
+    bool is_dying;
 } Seeds_c;
 Elements *New_Seeds_c(int label, int x, int y);
 void reduce_seeds_c_countdown() ;

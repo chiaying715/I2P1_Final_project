@@ -48,6 +48,7 @@ Elements *New_Seeds_c(int label, int x, int y)
     }
     pDerivedObj->plant_time = al_get_time();
     pDerivedObj->is_harvestable = false;
+    pDerivedObj->is_dying = false;
     pDerivedObj->score = 5;
     pDerivedObj->dele = 0;
     pDerivedObj->font = al_create_builtin_font();
@@ -117,10 +118,19 @@ void Seeds_c_update(Elements *self)
                 //self->dele = false;
                 //add
             //}
-            if (time_since_last_watered >= 30.0) {
+
+            if (time_since_last_watered >= 25.0) {
                 //printf("Seeds_c object has not been watered for 60 seconds and will be destroyed\n");
+                Obj->is_dying= true; // 标记为删除
+            }
+            else{
+                Obj->is_dying= false;
+            }
+            if (time_since_last_watered >= 30.0) {
+                //printf("seeds_e object has not been watered for 60 seconds and will be destroyed\n");
                 self->dele = true; // 标记为删除
                 printf("seeds_c_delete_nowater:%d\n", self->id);
+                //printf("seeds_e_delete_nowater:%d\n", self->id);
                 Obj->last_watered_time = current_time;
                 return;
             }
@@ -220,7 +230,11 @@ void Seeds_c_draw(Elements *self)
     Seeds_c *Obj = ((Seeds_c *)(self->pDerivedObj));
     if (Obj->is_harvestable) {
         al_draw_tinted_bitmap(Obj->img, al_map_rgb(255, 255, 255), Obj->x, Obj->y-30, 0);
-    } else {
+    } 
+    else if(Obj->is_dying){
+        al_draw_tinted_bitmap(Obj->img, al_map_rgb(0, 0, 0), Obj->x, Obj->y-30, 0);
+    }
+    else {
         al_draw_tinted_bitmap(Obj->img, al_map_rgb(128, 128, 128), Obj->x, Obj->y-30, 0);
     }
     ALLEGRO_COLOR text_color = al_map_rgb(255, 255, 255);
