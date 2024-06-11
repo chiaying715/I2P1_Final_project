@@ -59,12 +59,12 @@ Elements *New_Tree(int label)
         //printf("treehitbox: %d\n", pDerivedObj->hitbox);
         // setting the interact object
         pObj->inter_obj[pObj->inter_len++] = Character_L;
+        pObj->dele = 0;
         // setting derived object function
         pObj->pDerivedObj = pDerivedObj;
         pObj->Update = Tree_update;
         pObj->Interact = Tree_interact;
         pObj->Draw = Tree_draw;
-        pObj->dele = 0;
         pObj->Destroy = Tree_destory;
         pDerivedObj->create_time = al_get_time();
         //lastTreeTime = now;

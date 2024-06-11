@@ -63,6 +63,11 @@ void menu_update(Scene *self)
         self->scene_end = true;
         window = 4; //about scene
     }
+    else if (key_state[ALLEGRO_KEY_TAB])
+    {
+        self->scene_end = true;
+        window = 2; //ENDGAME scene
+    }
     return;
 }
 void menu_draw(Scene *self)
