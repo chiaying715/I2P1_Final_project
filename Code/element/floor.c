@@ -8,7 +8,7 @@ Elements *New_Floor(int label)
     Floor *pDerivedObj = (Floor *)malloc(sizeof(Floor));
     Elements *pObj = New_Elements(label);
     // setting derived object member
-    pDerivedObj->img = al_load_bitmap("assets/image/floor.png");
+    pDerivedObj->img = al_load_bitmap("assets/image/floor4.png");
     pDerivedObj->width = al_get_bitmap_width(pDerivedObj->img);
     pDerivedObj->height = al_get_bitmap_height(pDerivedObj->img);
     printf("floorwidth:%d floorheight:%d height:%d width:%d\n", pDerivedObj->width, pDerivedObj->height, HEIGHT, WIDTH);

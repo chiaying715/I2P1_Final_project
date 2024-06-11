@@ -8,7 +8,7 @@ Elements *New_Trap(int label)
     Trap *pDerivedObj = (Trap *)malloc(sizeof(Trap));
     Elements *pObj = New_Elements(label);
     // setting derived object member
-    pDerivedObj->img = al_load_bitmap("assets/image/trap.png");
+    pDerivedObj->img = al_load_bitmap("assets/image/trap2.png");
     pDerivedObj->width = al_get_bitmap_width(pDerivedObj->img);
     pDerivedObj->height = al_get_bitmap_height(pDerivedObj->img);
     _Trap_load_map(pDerivedObj);
@@ -69,7 +69,7 @@ void Trap_interact(Elements *self, Elements *tar)
         //printf("chara->x=%d, Obj=%d, %d\n", chara->x, 65 + Obj->x - Obj->width, Obj->x + Obj->width);
         // if ((chara->x >= 65 + Obj->x - Obj->width)&&
         //     (chara->x <= Obj->x + Obj->width)&&(chara->y >= HEIGHT - Obj->height - 150))
-        if ((chara->x >= 65 + Obj->x - Obj->width)&&
+        if ((chara->x >= -25 + Obj->x - Obj->width)&&
             (chara->x <= Obj->x + Obj->width))
         {
             Endgamescene_switch_trigger = 1;
